@@ -14,7 +14,7 @@ namespace OnLineBookStore.Server.Infrastructure
                 .UseSwagger()
                 .UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("swagger/v1/swagger.json", "My Administration API");
+                    c.SwaggerEndpoint("swagger/v1/swagger.json", "My OnLineBookStore API");
                     c.RoutePrefix = string.Empty;
                 });
         
@@ -22,7 +22,7 @@ namespace OnLineBookStore.Server.Infrastructure
         public static IApplicationBuilder ApplyMigrations(this IApplicationBuilder app)
         {
             using var services = app.ApplicationServices.CreateScope();
-            var dBContext =  services.ServiceProvider.GetService<ApplicationDbContext>();
+            var dBContext =  services.ServiceProvider.GetService<OnLineBookStoreDbContext>();
             
             dBContext.Database.Migrate();
 
@@ -32,7 +32,7 @@ namespace OnLineBookStore.Server.Infrastructure
         public static void ApplyRoles(this IApplicationBuilder app)
         {
             using var services = app.ApplicationServices.CreateScope();
-            var context = services.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var context = services.ServiceProvider.GetRequiredService<OnLineBookStoreDbContext>();
 
             if (context.Roles.Count() <= 1)
             {
