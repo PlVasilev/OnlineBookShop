@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+
     public class Cart
     {
         [Key]
@@ -11,8 +11,6 @@
         [Required]
         public string UserId { get; set; }
         public User User { get; set; }
-        
-        [NotMapped]
-        public IEnumerable<Book> Books { get; set; } = new List<Book>();
+        public ICollection<CartBook> CartBooks { get; set; } = new List<CartBook>();
     }
 }

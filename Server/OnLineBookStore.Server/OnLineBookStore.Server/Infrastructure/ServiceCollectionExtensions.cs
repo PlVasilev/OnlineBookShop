@@ -11,12 +11,14 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;
+    using Features.Cart.Services;
 
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services) =>
             services
-                .AddTransient<IIdentityService, IdentityService>();
+                .AddTransient<IIdentityService, IdentityService>()
+                .AddTransient<ICartService, CartService>();
 
 
         public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration) =>

@@ -1,4 +1,6 @@
-﻿namespace OnLineBookStore.Server.Data.Models
+﻿using System.Collections.Generic;
+
+namespace OnLineBookStore.Server.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
     public class Book
@@ -50,6 +52,7 @@
         [Range(0, int.MaxValue)]
         public int NumberOfPurchases { get; set; }
 
+        public ICollection<CartBook> CartBooks { get; set; } = new List<CartBook>();
 
     }
 }

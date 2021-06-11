@@ -1,4 +1,7 @@
-﻿namespace OnLineBookStore.Server.Features.Identity
+﻿using OnLineBookStore.Server.Features.Cart.Services;
+using OnLineBookStore.Server.Infrastructure;
+
+namespace OnLineBookStore.Server.Features.Identity
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -13,14 +16,18 @@
         private readonly UserManager<User> _userManager;
         private readonly AppSettings _appSettings;
         private readonly IIdentityService _identityService;
+        private readonly ICartService _cartService;
+
 
         public IdentityController(UserManager<User> userManager,
             IOptions<AppSettings> appSettings, 
-            IIdentityService identityService)
+            IIdentityService identityService, 
+            ICartService cartService)
         {
             _userManager = userManager;
             _identityService = identityService;
             _appSettings = appSettings.Value;
+            _cartService = cartService;
         }
 
         [HttpPost]
@@ -33,14 +40,21 @@
                 Email = model.Email
             };
 
+            if (_userManager.FindByEmailAsync(user.Email) != null)
+                return BadRequest("User with that Email Exists");
+            
+
+            if (_userManager.FindByNameAsync(user.UserName) != null)
+                return BadRequest("User with that Username Exists");
+            
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (_userManager.Users.Count() == 1)
-            {
                 await _userManager.AddToRoleAsync(user, "Admin");
-            }
-
+            
             await _userManager.AddToRoleAsync(user, "User");
+
+            await _cartService.AddToUser(user.Id);
 
             if (result.Succeeded) return Ok();
             
@@ -52,10 +66,12 @@
         public async Task<ActionResult<LoginResponseModel>> Login(LoginUserRequestModel model)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
-            if (user == null) return Unauthorized();
+            if (user == null) 
+                return Unauthorized();
 
             var passwordValid = _userManager.CheckPasswordAsync(user, model.Password);
-            if (passwordValid == null) return Unauthorized();
+            if (passwordValid == null) 
+                return Unauthorized();
 
             var roles = await this._userManager.GetRolesAsync(user);
 

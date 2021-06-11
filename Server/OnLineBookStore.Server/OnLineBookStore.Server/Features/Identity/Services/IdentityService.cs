@@ -26,7 +26,7 @@
             {
                 claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
             }
-
+            
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),

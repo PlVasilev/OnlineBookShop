@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnLineBookStore.Server.Data;
 
 namespace OnLineBookStore.Server.Data.Migrations
 {
     [DbContext(typeof(OnLineBookStoreDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210611210131_Added-CartsToDBContext")]
+    partial class AddedCartsToDBContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -225,24 +227,6 @@ namespace OnLineBookStore.Server.Data.Migrations
                     b.ToTable("Carts");
                 });
 
-            modelBuilder.Entity("OnLineBookStore.Server.Data.Models.CartBook", b =>
-                {
-                    b.Property<string>("CartId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("BookId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("CartId", "BookId");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("CartBooks");
-                });
-
             modelBuilder.Entity("OnLineBookStore.Server.Data.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -370,35 +354,6 @@ namespace OnLineBookStore.Server.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("OnLineBookStore.Server.Data.Models.CartBook", b =>
-                {
-                    b.HasOne("OnLineBookStore.Server.Data.Models.Book", "Book")
-                        .WithMany("CartBooks")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("OnLineBookStore.Server.Data.Models.Cart", "Cart")
-                        .WithMany("CartBooks")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("Cart");
-                });
-
-            modelBuilder.Entity("OnLineBookStore.Server.Data.Models.Book", b =>
-                {
-                    b.Navigation("CartBooks");
-                });
-
-            modelBuilder.Entity("OnLineBookStore.Server.Data.Models.Cart", b =>
-                {
-                    b.Navigation("CartBooks");
                 });
 
             modelBuilder.Entity("OnLineBookStore.Server.Data.Models.User", b =>
