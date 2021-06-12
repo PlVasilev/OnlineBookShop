@@ -1,1 +1,52 @@
-<div class="jumbotron"></div>
+<div class="jumbotron">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <form [formGroup]="updateForm" class="user-form" (ngSubmit)="create()">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" rows="3"
+                            formControlName="description"></textarea>
+                    </div>
+                    <div *ngIf="description?.touched && description?.errors" class="alert alert-danger">
+                        Description must between 3 and 1000 charcters lenght
+                    </div>
+                    <div class="form-group">
+                        <label for="summaryDescription">Summary Description</label>
+                        <textarea class="form-control" id="summaryDescription" rows="3"
+                            formControlName="summaryDescription"></textarea>
+                    </div>
+                    <div *ngIf="summaryDescription?.touched && summaryDescription?.errors" class="alert alert-danger">
+                        Summary Description must between 3 and 100 charcters lenght
+                    </div>
+                    <div class="mb-3">
+                        <label for="bookImage" class="form-label">Book Image</label>
+                        <input type="text" class="form-control" formControlName="bookImage">
+                    </div>
+                    <div *ngIf="bookImage?.touched && bookImage?.errors" class="alert alert-danger">
+                        Book Image must be a vilid URL adress
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" class="form-control" formControlName="price">
+                    </div>
+                    <div *ngIf="price?.touched && price?.errors" class="alert alert-danger">
+                        Price must be a positive number
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" formControlName="quantity">
+                    </div>
+                    <div *ngIf="quantity?.touched && quantity?.errors" class="alert alert-danger">
+                        Quantity must be a positive number or zero
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    </div>
+
+
+</div>

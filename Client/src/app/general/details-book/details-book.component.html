@@ -1,0 +1,35 @@
+<div *ngIf="!book" class="site-section" id="property-details">
+    <h1>LOADING...</h1>
+</div>
+<div *ngIf="book" class="site-section" id="property-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 pl-lg-5 ml-auto">
+                <h3 class="text-black mb-4">{{book?.title}}</h3>
+            </div>
+
+            <div class="col-lg-12">
+
+                <div class="owl-carousel slide-one-item with-dots">
+                    <div><img src={{book?.bookImage}} alt="Image" class="img-fluid"></div>
+
+                </div>
+            </div>
+            <div class="col-lg-12 pl-lg-5 ml-auto">
+                <div class="mb-5 property-details">
+                    <p>Price: $ {{book?.price}}</p>
+                    <p>isbn: {{book?.isbn}}</p>
+                    <p>Author: {{book?.author}}</p>
+                    <p>Year : {{book?.year}} </p>
+                    <p>numberOfPages: {{book?.numberOfPages}}</p>
+                    <p>quantity : {{book?.quantity}}</p>
+                    <p>numberOfPurchases : {{book?.numberOfPurchases}}</p>
+                    <p>Description: {{book?.description}}</p>
+                    <a *ngIf="currentUser" class="btn btn-primary" (click)="buy(book?.id)">Send Reqest to view the property</a>
+                    <a *ngIf="adminUser" (click)="edit(book?.id)" class="btn btn-primary">Edit</a>
+                    <a *ngIf="adminUser" (click)="delete(book?.id)" class="btn btn-primary">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

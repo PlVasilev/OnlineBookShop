@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import {  ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AllBooksComponent } from './all-books/all-books.component';
+import { DetailsBookComponent } from './details-book/details-book.component';
 
 
 
@@ -13,7 +14,8 @@ import { AllBooksComponent } from './all-books/all-books.component';
   declarations: [
     LoginComponent,
     RegisterComponent,
-    AllBooksComponent
+    AllBooksComponent,
+    DetailsBookComponent
     
   ],
   imports: [
@@ -23,7 +25,9 @@ import { AllBooksComponent } from './all-books/all-books.component';
   ],
   exports:[
     [ LoginComponent,
-      RegisterComponent
+      RegisterComponent,
+      AllBooksComponent,
+      DetailsBookComponent
    ]
   ]
 })

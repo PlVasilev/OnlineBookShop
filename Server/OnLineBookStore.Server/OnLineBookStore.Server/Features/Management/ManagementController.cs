@@ -10,9 +10,9 @@
     [Authorize(Roles = "Admin")]
     public class ManagementController : ApiController
     {
-        private readonly ManagementService _managementService;
+        private readonly IManagementService _managementService;
 
-        public ManagementController(ManagementService managementService)
+        public ManagementController(IManagementService managementService)
         {
             _managementService = managementService;
         }

@@ -4,7 +4,7 @@ using OnLineBookStore.Server.Features.Management.Models;
 
 namespace OnLineBookStore.Server.Features.Management.Services
 {
-    interface IManagementService
+    public interface IManagementService
     {
         public  Task<bool> Delete(string id, string userId);
 
