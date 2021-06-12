@@ -34,7 +34,7 @@ const routes: Routes = [{
   data: { isLogged: true }
 },
 {
-  path: "book/:id",
+  path: "books/:id",
   component: DetailsBookComponent,
   canActivate: [AuthGuardService],
   data: { isLogged: true }

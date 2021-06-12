@@ -6,6 +6,7 @@
     using Services;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Infrastructure;
 
     [Authorize]
     public class BookController : ApiController
@@ -20,9 +21,29 @@
 
         [HttpGet]
         [AllowAnonymous]
-        [Route(nameof(BestSellers))]
-        public async Task<IEnumerable<BookListViewModel>> BestSellers() =>
-            await _bookService.BestSellers();
+        [Route(nameof(All))]
+        public async Task<IEnumerable<BookListViewModel>> All() =>
+            await _bookService.All();
+
+        [HttpGet]
+        [Authorize]
+        [Route("{id}")]
+        public async Task<ActionResult<BookDetailsViewModel>> Details(string id) =>
+            await _bookService.Details(id);
+
+        [HttpDelete]
+        [Authorize]
+        [Route("{id}")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            var userId = this.User.GetId();
+            var deleted = await _bookService.Delete(id, userId);
+            if (!deleted)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
 
     }
 }

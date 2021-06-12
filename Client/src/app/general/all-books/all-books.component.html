@@ -1,1 +1,25 @@
-<div class="jumbotron"></div>
+<div class="jumbotron">
+    <div class="container">
+        <div class="row row-cols-auto justify-content-md-center">
+            <div class="col"  *ngFor="let book of books">
+                <div class="card" style="width: 18rem;" [ngClass]="book.isLimited ? 'border-danger': 'border-dark'">
+                    <img class="card-img-top" src={{book?.bookImage}} alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{book.title}}</h5>
+                        <p class="card-text">{{book.summaryDescription}}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Author: {{book.author}}</li>
+                        <li class="list-group-item">Price: $ {{book.price | number : '1.2-2'}} </li>
+                        <li *ngIf="book.isLimited" class="list-group-item text-danger font-weight-bold">Limited Qantity</li>
+                    </ul>
+                    <div class="card-body">
+                        <button routerLink="book/{{book.id}}" class="btn btn-primary my-2">Buy Book</button>
+                        <button routerLink="{{book.id}}" class="btn btn-secondary my-2">See Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

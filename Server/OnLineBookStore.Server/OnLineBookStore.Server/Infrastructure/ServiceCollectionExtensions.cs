@@ -3,6 +3,7 @@
     using Data;
     using Data.Models;
     using System.Text;
+    using Features.Book.Services;
     using Features.Identity.Services;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
@@ -20,7 +21,8 @@
             services
                 .AddTransient<IIdentityService, IdentityService>()
                 .AddTransient<ICartService, CartService>()
-                .AddTransient<IManagementService, ManagementService>();
+                .AddTransient<IManagementService, ManagementService>()
+                .AddTransient<IBookService, BookService>();
 
 
         public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration) =>
