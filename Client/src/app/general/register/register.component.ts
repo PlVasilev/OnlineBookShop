@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { MustMatch } from 'src/app/services/passwordValidator';
 
@@ -11,7 +12,7 @@ import { MustMatch } from 'src/app/services/passwordValidator';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService,private toastrService: ToastrService, private router: Router) {
     this.registerForm = this.fb.group({})
    }
 
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
   register(){
     console.log(this.registerForm.value);
     this.authService.register(this.registerForm.value).subscribe(data =>{
+      this.toastrService.success("success", "You have Registered!");
         this.router.navigate(["login"])
     })
     

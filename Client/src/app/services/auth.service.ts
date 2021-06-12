@@ -36,8 +36,11 @@ export class AuthService {
   
     isAdmin(){
       let token = this.getToken();
-      let roles = JSON.parse(window.atob(token.split('.')[1])).role;
-      return roles.includes('Admin');
+      if (token !== ""){
+        let roles = JSON.parse(window.atob(token.split('.')[1])).role;
+        return roles.includes('Admin');
+      }
+      return false;
     }
   
     isAutheticated(){
@@ -51,6 +54,8 @@ export class AuthService {
       try {
        localStorage.clear();
        this.toastrService.success("success", "You have logged out!");
+        console.log( this.getToken()) ;
+       this.isAdmin();
        this.router.navigate(['/']);
       } catch (error) {
         this.toastrService.error("error", "There was problem with your logging you out!");
