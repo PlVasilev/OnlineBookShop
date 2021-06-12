@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
-                <form [formGroup]="updateForm" class="user-form" (ngSubmit)="create()">
+                <form [formGroup]="updateForm" class="user-form" (ngSubmit)="update()">
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="form-control" id="description" rows="3"
@@ -41,7 +41,7 @@
                     <div *ngIf="quantity?.touched && quantity?.errors" class="alert alert-danger">
                         Quantity must be a positive number or zero
                     </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
             <div class="col-lg-4"></div>

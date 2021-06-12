@@ -34,7 +34,6 @@
             string bookImage,
             decimal price,
             int quantity,
-            int numberOfPurchases,
             string creatorId)
         {
 
@@ -47,7 +46,6 @@
             book.BookImage = bookImage;
             book.Price = price;
             book.Quantity = quantity;
-            book.NumberOfPages = numberOfPurchases;
             book.CreatorId = creatorId;
 
             await _data.SaveChangesAsync();

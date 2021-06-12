@@ -10,7 +10,7 @@
                         <div class="text-center">
                             <img src={{book?.bookImage}} alt="Image" class="img-top">
                             <a *ngIf="currentUser" class="btn btn-primary" (click)="buy(book?.id)">Buy</a>
-                            <a *ngIf="adminUser" (click)="edit(book?.id)" class="btn btn-warning">Edit</a>
+                            <a *ngIf="adminUser" (click)="update(book?.id)" class="btn btn-warning">Edit</a>
                             <a *ngIf="adminUser" (click)="delete(book?.id)" class="btn btn-danger">Delete</a>
                         </div>
                       

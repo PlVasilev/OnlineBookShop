@@ -15,7 +15,6 @@ namespace OnLineBookStore.Server.Features.Management.Services
             string bookImage,
             decimal price,
             int quantity,
-            int numberOfPurchases,
             string creatorId);
 
         public  Task<CreateBookResponseModel> Create(

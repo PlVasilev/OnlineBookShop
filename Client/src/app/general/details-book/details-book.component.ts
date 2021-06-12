@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from 'src/app/models/book';
 import { AuthService } from 'src/app/services/auth.service';
 import { BookService } from 'src/app/services/book.service';
@@ -13,7 +13,11 @@ export class DetailsBookComponent implements OnInit {
   id: string | undefined;
   book: Book | undefined;
  
-  constructor(private raute: ActivatedRoute, private bookService: BookService, private authServise: AuthService) {
+  constructor(
+    private raute: ActivatedRoute, 
+    private bookService: BookService, 
+    private authServise: AuthService,
+    private router: Router) {
     this.raute.params.subscribe(res => {
       this.id = res['id'];
       this.bookService.details(this.id).subscribe(res => {
@@ -29,8 +33,8 @@ export class DetailsBookComponent implements OnInit {
 
   get adminUser(){return this.authServise.isAdmin()}
 
-  edit(id: any){
-
+  update(id: any){
+    this.router.navigate(["/" + id + "/update"])
   }
 
   delete(id: any){

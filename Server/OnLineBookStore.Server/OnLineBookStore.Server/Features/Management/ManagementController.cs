@@ -43,7 +43,6 @@
                 model.BookImage,
                 model.Price,
                 model.Quantity,
-                model.NumberOfPurchases,
                 userId);
 
             if (!updated) return BadRequest();

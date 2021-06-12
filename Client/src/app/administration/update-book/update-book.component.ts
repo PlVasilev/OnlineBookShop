@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Book } from 'src/app/models/book';
 import { BookService } from 'src/app/services/book.service';
 
 @Component({
@@ -8,45 +11,61 @@ import { BookService } from 'src/app/services/book.service';
   styleUrls: ['./update-book.component.css']
 })
 export class UpdateBookComponent implements OnInit {
-
   updateForm: FormGroup;
+  book: Book | undefined;
 
-  constructor(private fb: FormBuilder, private bookService: BookService) {
+  constructor(
+    private fb: FormBuilder,
+     private bookService: BookService, 
+     private route: ActivatedRoute,
+     private toastrService: ToastrService,
+     private router: Router) 
+     {
     this.updateForm = this.fb.group({
-      'title': ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       'description': ['', [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]],
       'summaryDescription': ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      'isbn': ['', [Validators.required, Validators.pattern('[0-9-]{13}')]],
       'bookImage': ['', Validators.required],
-      'author': ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      'year': ['', [Validators.required, Validators.min(0), Validators.max(3000)]],
       'price': ['', [Validators.required, Validators.min(0), Validators.max(100000000)]],
-      'numberOfPages': ['', [Validators.required, Validators.min(1), Validators.max(100000000)]],
       'quantity': ['', [Validators.required, Validators.min(0), Validators.max(100000000)]],
-      'numberOfPurchases': ['', [Validators.required, Validators.min(0), Validators.max(100000000)]],
     })
 
   }
 
   ngOnInit(): void {
-  }
-
-  create() {
-    console.log(this.updateForm.value);
-    this.bookService.create(this.updateForm.value).subscribe(data => {
-      console.log(data)
+    this.route.params.subscribe(params => {
+      let id = params['id']
+      this.bookService.details(id).subscribe(res => {
+        this.book = res;
+        this.updateForm = this.fb.group({
+          'description': [`${this.book.description}`,  [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]],
+          'summaryDescription': [`${this.book.summaryDescription}`, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+          'bookImage': [`${this.book.bookImage}`, Validators.required],
+          'price': [`${this.book.price}`,  [Validators.required, Validators.min(0), Validators.max(100000000)]],
+          'quantity': [`${this.book.quantity}`,  [Validators.required, Validators.min(0), Validators.max(100000000)]],
+        })
+      })
     })
   }
-  get title() { return this.updateForm.get('title'); }
+
+  update() {   
+    let updateData = {
+      'id': this.book?.id,
+      'description': this.updateForm.value['description'],
+      'summaryDescription': this.updateForm.value['summaryDescription'],
+      'bookImage': this.updateForm.value['bookImage'],
+      'price': this.updateForm.value['price'],
+      'quantity': this.updateForm.value['quantity']
+    }
+    console.log(updateData);
+    
+    this.bookService.update(updateData).subscribe(data => {
+      this.toastrService.success("success", "You have Updated a Book!");
+      this.router.navigate([`/books/${this.book?.id}`])
+    })
+  }
   get description() { return this.updateForm.get('description'); }
   get summaryDescription() { return this.updateForm.get('summaryDescription'); }
-  get isbn() { return this.updateForm.get('isbn'); }
   get bookImage() { return this.updateForm.get('bookImage'); }
-  get author() { return this.updateForm.get('author'); }
-  get year() { return this.updateForm.get('year'); }
   get price() { return this.updateForm.get('price'); }
-  get numberOfPages() { return this.updateForm.get('numberOfPages'); }
   get quantity() { return this.updateForm.get('quantity'); }
-  get numberOfPurchases() { return this.updateForm.get('numberOfPurchases'); }
-
 }

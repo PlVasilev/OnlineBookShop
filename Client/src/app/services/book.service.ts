@@ -35,7 +35,7 @@ export class BookService {
     return this.http.delete(this.dtailsPath + `/${id}`)
   }
 
-  edit(data: any) : Observable<Book>{
+  update(data: any) : Observable<Book>{
     return this.http.put<Book>(this.editPath,data)
   }
 }
