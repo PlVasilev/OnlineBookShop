@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+.user-form{
+    border: 0.1em solid slategrey;
+    padding: 1em;
+    margin: 1em;
+}
+
+.jumbotron {
+   min-height: 88vh;
+}
