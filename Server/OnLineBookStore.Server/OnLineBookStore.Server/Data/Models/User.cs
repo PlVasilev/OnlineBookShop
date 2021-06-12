@@ -12,6 +12,7 @@
         [EmailAddress]
         public override string Email { get; set; }
 
+        public string CartId { get; set; }
         public Cart Cart { get; set; }
     }
 }

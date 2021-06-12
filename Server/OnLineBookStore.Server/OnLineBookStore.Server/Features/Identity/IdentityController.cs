@@ -1,7 +1,4 @@
-﻿using OnLineBookStore.Server.Features.Cart.Services;
-using OnLineBookStore.Server.Infrastructure;
-
-namespace OnLineBookStore.Server.Features.Identity
+﻿namespace OnLineBookStore.Server.Features.Identity
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -11,6 +8,7 @@ namespace OnLineBookStore.Server.Features.Identity
     using OnLineBookStore.Server.Data.Models;
     using Models;
     using Services;
+    using OnLineBookStore.Server.Features.Cart.Services;
     public class IdentityController : ApiController
     {
         private readonly UserManager<User> _userManager;
@@ -40,12 +38,13 @@ namespace OnLineBookStore.Server.Features.Identity
                 Email = model.Email
             };
 
-            if (_userManager.FindByEmailAsync(user.Email) != null)
-                return BadRequest("User with that Email Exists");
+
+            if (await _userManager.FindByEmailAsync(user.Email) != null)
+                return BadRequest("User with that Email Exists.");
             
 
-            if (_userManager.FindByNameAsync(user.UserName) != null)
-                return BadRequest("User with that Username Exists");
+            if (await _userManager.FindByNameAsync(user.UserName) != null)
+                return BadRequest("User with that Username Exists.");
             
             var result = await _userManager.CreateAsync(user, model.Password);
 
@@ -54,7 +53,7 @@ namespace OnLineBookStore.Server.Features.Identity
             
             await _userManager.AddToRoleAsync(user, "User");
 
-            await _cartService.AddToUser(user.Id);
+            var cartId = await _cartService.AddToUser(user.Id);
 
             if (result.Succeeded) return Ok();
             

@@ -1,4 +1,6 @@
-﻿namespace OnLineBookStore.Server.Features.Cart.Services
+﻿using System.Linq;
+
+namespace OnLineBookStore.Server.Features.Cart.Services
 {
     using System;
     using System.Threading.Tasks;
@@ -21,7 +23,14 @@
             };
 
             _data.Carts.Add(cart);
+            var user = _data.Users.FirstOrDefault(u => u.Id == userId);
+            if (user == null)
+                return false;
+            
+            user.CartId = cart.Id;
 
+            _data.Users.Update(user);
+            
             var result = await _data.SaveChangesAsync();
             return result > 0;
         }
