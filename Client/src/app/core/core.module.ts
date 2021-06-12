@@ -19,7 +19,7 @@ import { ToastrModule } from 'ngx-toastr';
     NotFoundComponent, 
     NotAuthorizedComponent, 
     FooterComponent, 
-    NavigationComponent
+    NavigationComponent,
   ],
   imports: [
     CommonModule,

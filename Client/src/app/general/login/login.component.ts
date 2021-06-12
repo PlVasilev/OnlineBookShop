@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       console.log(data)
       this.authService.saveToken(data['token']);
       this.toastrService.success("success", "You have Logged In!");
-      this.router.navigate(["/"])
+      this.router.navigate(["books"])
     })
   }
 

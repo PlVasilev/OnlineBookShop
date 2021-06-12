@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CreateBookComponent } from './administration/create-book/create-book.component';
 import { LandingComponent } from './core/landing/landing.component';
 import { NotAuthorizedComponent } from './core/not-authorized/not-authorized.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
+import { AllBooksComponent } from './general/all-books/all-books.component';
 import { LoginComponent } from './general/login/login.component';
 import { RegisterComponent } from './general/register/register.component';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -26,6 +28,30 @@ const routes: Routes = [  {
   canActivate: [AuthGuardService],
   data: {
       isLogged: false
+  }
+},
+{
+  path: 'books',
+  component: AllBooksComponent,
+  canActivate: [AuthGuardService],
+  data: {
+      isLogged: true
+  }
+},
+{
+  path: 'createBook',
+  component: CreateBookComponent,
+  canActivate: [AuthGuardService],
+  data: {
+    isAdmin: true
+  }
+},
+{
+  path: 'updateBook',
+  component: AllBooksComponent,
+  canActivate: [AuthGuardService],
+  data: {
+    isAdmin: true
   }
 },
 {
