@@ -1,4 +1,6 @@
-﻿namespace OnLineBookStore.Server.Features.Identity
+﻿using OnLineBookStore.Server.Infrastructure;
+
+namespace OnLineBookStore.Server.Features.Identity
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -32,6 +34,9 @@
         [Route(nameof(Register))]
         public async Task<ActionResult> Register(RegisterUserRequestModel model)
         {
+            if (User.GetId() != null)
+                return BadRequest("To Register new user you must log out first.");
+
             var user = new User
             {
                 UserName = model.Username,
@@ -62,6 +67,10 @@
         [Route(nameof(Login))]
         public async Task<ActionResult<LoginResponseModel>> Login(LoginUserRequestModel model)
         {
+            if (User.GetId() != null)
+             return BadRequest("You are logged In.");
+            
+
             var user = await _userManager.FindByNameAsync(model.Username);
             if (user == null) 
                 return Unauthorized();
