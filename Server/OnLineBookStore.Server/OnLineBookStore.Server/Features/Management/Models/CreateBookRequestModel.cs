@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnLineBookStore.Server.Data.Models
+namespace OnLineBookStore.Server.Features.Management.Models
 {
-    using System.ComponentModel.DataAnnotations;
-    public class Book
+    public class CreateBookRequestModel
     {
-        [Key]
-        public string Id { get; set; }
 
         [Required]
         [MinLength(3)]
@@ -43,7 +39,7 @@ namespace OnLineBookStore.Server.Data.Models
 
         [Range(typeof(decimal), "0", "79228162514264337593543950335")]
         public decimal Price { get; set; }
-      
+
         [Range(1, int.MaxValue)]
         public int NumberOfPages { get; set; }
 
@@ -52,11 +48,6 @@ namespace OnLineBookStore.Server.Data.Models
 
         [Range(0, int.MaxValue)]
         public int NumberOfPurchases { get; set; }
-
-        [Required]
-        public string CreatorId { get; set; }
-
-        public ICollection<CartBook> CartBooks { get; set; } = new List<CartBook>();
 
     }
 }

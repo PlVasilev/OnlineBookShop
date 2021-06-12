@@ -10,7 +10,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
-    public class CartController : Controller
+    public class CartController : ApiController
     {
         private readonly OnLineBookStoreDbContext _data;
 

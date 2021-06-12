@@ -38,11 +38,9 @@
                 Email = model.Email
             };
 
-
             if (await _userManager.FindByEmailAsync(user.Email) != null)
                 return BadRequest("User with that Email Exists.");
             
-
             if (await _userManager.FindByNameAsync(user.UserName) != null)
                 return BadRequest("User with that Username Exists.");
             
@@ -53,7 +51,7 @@
             
             await _userManager.AddToRoleAsync(user, "User");
 
-            var cartId = await _cartService.AddToUser(user.Id);
+            await _cartService.AddToUser(user.Id);
 
             if (result.Succeeded) return Ok();
             
