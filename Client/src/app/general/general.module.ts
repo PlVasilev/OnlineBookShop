@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AllBooksComponent } from './all-books/all-books.component';
 import { DetailsBookComponent } from './details-book/details-book.component';
 import { RouterModule } from '@angular/router';
+import { SearchBooksComponent } from './search-books/search-books.component';
 
 
 
@@ -16,7 +17,8 @@ import { RouterModule } from '@angular/router';
     LoginComponent,
     RegisterComponent,
     AllBooksComponent,
-    DetailsBookComponent
+    DetailsBookComponent,
+    SearchBooksComponent
     
   ],
   imports: [

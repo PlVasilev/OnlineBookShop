@@ -18,8 +18,8 @@
             </ul>
           </li>
         </ul>
-        <form *ngIf="currentUser" class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form *ngIf="currentUser" [formGroup]="searchForm" class="d-flex" (ngSubmit)="search()">
+          <input class="form-control me-2" class="form-control"  formControlName="searchString" type="search" placeholder="Search Title or Author" aria-label="Search">
           <button class="btn btn-success" type="submit">Search</button>
         </form>
         <button *ngIf="!currentUser" routerLink="login" type="button" class="btn btn-light" aria-current="page">Log In</button>

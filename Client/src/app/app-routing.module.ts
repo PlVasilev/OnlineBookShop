@@ -9,6 +9,7 @@ import { AllBooksComponent } from './general/all-books/all-books.component';
 import { DetailsBookComponent } from './general/details-book/details-book.component';
 import { LoginComponent } from './general/login/login.component';
 import { RegisterComponent } from './general/register/register.component';
+import { SearchBooksComponent } from './general/search-books/search-books.component';
 import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [{
@@ -37,6 +38,12 @@ const routes: Routes = [{
 {
   path: "books/:id",
   component: DetailsBookComponent,
+  canActivate: [AuthGuardService],
+  data: { isLogged: true }
+},
+{
+  path: "search/:search",
+  component: SearchBooksComponent,
   canActivate: [AuthGuardService],
   data: { isLogged: true }
 },

@@ -16,16 +16,11 @@ export class AllBooksComponent implements OnInit {
   ngOnInit(): void {
     this.getBooks();
   }
-  
+
   getBooks(){
     this.bookService.all().subscribe((books: BookForList[]) => {
       this.books = books;
       console.log(this.books);
     })
   }
- 
-  edit(id: any) {
-      this.router.navigate(["/contracts/" + id + "/edit"])
-    } 
-
 }

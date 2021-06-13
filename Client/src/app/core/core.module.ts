@@ -4,11 +4,9 @@ import { LandingComponent } from './landing/landing.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -24,7 +22,7 @@ import { ToastrModule } from 'ngx-toastr';
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    ReactiveFormsModule
   ],
   exports: [
     LandingComponent,
