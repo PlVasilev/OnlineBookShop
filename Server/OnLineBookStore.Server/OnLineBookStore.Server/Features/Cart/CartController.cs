@@ -1,42 +1,43 @@
-﻿namespace OnLineBookStore.Server.Features.Cart
+﻿using OnLineBookStore.Server.Infrastructure;
+
+namespace OnLineBookStore.Server.Features.Cart
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.EntityFrameworkCore;
-    using Data;
     using Models;
     using Microsoft.AspNetCore.Mvc;
+    using Services;
 
     [Authorize]
     public class CartController : ApiController
     {
-        private readonly OnLineBookStoreDbContext _data;
+        private readonly ICartService _cartService;
 
-        public CartController(OnLineBookStoreDbContext data)
+        public CartController(ICartService cartService)
         {
-            _data = data;
+            _cartService = cartService;
         }
+
 
         [HttpGet]
         [Route(nameof(GetCart) + "/{id}")]
-        public async Task<ActionResult<IEnumerable<CartBooksViewModel>>> GetCart(string id)
-        {
-            var result = await _data.Carts
-                .Where(cart => cart.Id == id)
-                .Include(cartBook => cartBook.CartBooks)
-                .ThenInclude(book => book.Book)
-                .SelectMany(c => c.CartBooks, (c, cb) =>
-                    new CartBooksViewModel
-                    {
-                        BookId = cb.BookId,
-                        BookTitle = cb.Book.Title,
-                        Quantity = cb.Quantity
-                    }
-                ).ToListAsync();
+        public async Task<IEnumerable<CartBooksViewModel>> GetCart(string id) => 
+            await _cartService.GetCart(id);
 
-            return result;
+
+        [HttpPost]
+        [Route(nameof(AddToCart))]
+        public async Task<ActionResult> AddToCart(AddToCartRequestModel model)
+        {
+            var userId = User.GetId();
+
+            var result = await _cartService.AddToCart(userId, model.BookId, model.Quantity);
+
+            if (!result)
+                BadRequest();
+            
+            return Ok();
         }
     }
 }

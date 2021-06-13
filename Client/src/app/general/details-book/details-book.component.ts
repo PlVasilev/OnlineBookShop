@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Book } from 'src/app/models/book';
 import { AuthService } from 'src/app/services/auth.service';
 import { BookService } from 'src/app/services/book.service';
+import { CartService } from 'src/app/services/cart.service';
+
 
 @Component({
   selector: 'app-details-book',
@@ -13,15 +16,22 @@ import { BookService } from 'src/app/services/book.service';
 export class DetailsBookComponent implements OnInit {
   id: string | undefined;
   book: Book | undefined;
+  buyForm: FormGroup;
  
   constructor(
+    private fb: FormBuilder,
     private raute: ActivatedRoute, 
     private bookService: BookService, 
+    private cartService: CartService,
     private authServise: AuthService,
     private router: Router,
     private toastrService: ToastrService) {
-    this.getbook()
+    this.getbook();
+    this.buyForm = this.fb.group({
+      'quantity': ['', [Validators.required, Validators.min(0), Validators.max(100000000)]],
+    })
   };
+  
 
   ngOnInit(): void {
   }
@@ -30,14 +40,15 @@ export class DetailsBookComponent implements OnInit {
 
   get adminUser(){return this.authServise.isAdmin()}
 
+  get quantity() {
+    return this.buyForm.get('quantity');
+  }
+
   getbook(){
     this.raute.params.subscribe(res => {
       this.id = res['id'];
       this.bookService.details(this.id).subscribe(res => {
-
-        console.log(res);
-        
-        this.book = res;
+        this.book =  res;
       })
     })
   }
@@ -53,7 +64,19 @@ export class DetailsBookComponent implements OnInit {
     }) 
   }
 
-  buy(id: any){
-
+  addToCart(){
+    let selectedQuantity = this.buyForm.value['quantity'];
+    if(this.book !== undefined && selectedQuantity > this.book.quantity){
+      console.log(selectedQuantity);
+      this.toastrService.error(`You Can NOT select more than ${this.book.quantity} copies !`);
+    } else{
+      let data = {
+        "bookId": this.book?.id,
+        "quantity": selectedQuantity
+      }
+      this.cartService.addToCart(data).subscribe(res =>{
+        this.router.navigate(["books"])
+      })
+    }
   }
 }

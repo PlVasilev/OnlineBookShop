@@ -50,10 +50,5 @@
             };
             return viewModel;
         }
-
-        public Task<bool> Delete(string id, string userId)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

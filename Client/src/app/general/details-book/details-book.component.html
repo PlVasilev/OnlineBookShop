@@ -9,11 +9,19 @@
                     <div class="owl-carousel slide-one-item with-dots">
                         <div class="text-center">
                             <img src={{book?.bookImage}} alt="Image" class="img-top">
-                            <a *ngIf="currentUser" class="btn btn-primary" (click)="buy(book?.id)">Buy</a>
                             <a *ngIf="adminUser" (click)="update(book?.id)" class="btn btn-warning">Edit</a>
                             <a *ngIf="adminUser" (click)="delete(book?.id)" class="btn btn-danger">Delete</a>
+                            <form [formGroup]="buyForm" class="add-to-cart-form"  (ngSubmit)="addToCart()">
+                                <div class="mb-3">
+                                    <input type="number" class="form-control" placeholder="Select Quantity of Coppies" formControlName="quantity">
+                                </div>
+                                <div *ngIf="quantity?.touched && quantity?.errors" class="alert alert-danger">
+                                    Quantity must be a positive number or zero
+                                </div>
+                                <button type="submit" class="btn btn-success">Add to Cart</button>
+                            </form>
                         </div>
-                      
+
                     </div>
                 </div>
                 <div class="col-lg-6 pl-lg-5 ml-auto details-container">
@@ -27,9 +35,32 @@
                         <p>quantity : {{book?.quantity}}</p>
                         <p>numberOfPurchases : {{book?.numberOfPurchases}}</p>
                         <p>Description: {{book?.description}}</p>
-                        
+
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Book } from '../models/book';
 import { BookForList } from '../models/bookForList';
-import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,7 @@ export class BookService {
   private editPath = environment.apiUrl + "/Management/UpdateBook";
 
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient) { }
 
   create(data: any): Observable<any>{
     return this.http.post<Book>(this.createPath,data);

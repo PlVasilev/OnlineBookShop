@@ -1,11 +1,13 @@
 ﻿namespace OnLineBookStore.Server.Features.Cart.Models
 {
-    public class CartBooksViewModel
+    using System.ComponentModel.DataAnnotations;
+    public class AddToCartRequestModel
     {
-        public string CartId { get; set; }
+        [Required]
         public string BookId { get; set; }
-        public string BookTitle { get; set; }
+
+        [Range(0, int.MaxValue)]
         public int Quantity { get; set; }
+
     }
 }
-

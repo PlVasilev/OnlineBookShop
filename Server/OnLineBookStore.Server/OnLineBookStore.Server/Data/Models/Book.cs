@@ -56,7 +56,7 @@ namespace OnLineBookStore.Server.Data.Models
         [Required]
         public string CreatorId { get; set; }
 
-        public ICollection<CartBook> CartBooks { get; set; } = new List<CartBook>();
+        public ICollection<CartBook> CartBooks { get; set; } =new List<CartBook>();
 
     }
 }
