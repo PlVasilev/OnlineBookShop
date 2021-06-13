@@ -1,64 +1,52 @@
-<section id="landing-image" class="py-5 text-center container">
-    <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="font-boarder">Wlcome to On Line Book Store</h1>
-            <p class="font-boarder">I find television very educating. Every time somebody turns on the set, I go into
-                the other room and read a book.</p>
-            <p>
-                <a *ngIf="!currentUser" routerLink="login" class="btn btn-primary my-2">Login</a>
-                <a *ngIf="!currentUser" routerLink="register" class="btn btn-secondary my-2">Register</a>
-            </p>
+<div class="jumbotron-landing">
+    <section id="landing-image" class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="font-boarder">Wlcome to On Line Book Store</h1>
+                <p class="font-boarder">I find television very educating. Every time somebody turns on the set, I go
+                    into
+                    the other room and read a book.</p>
+                <p>
+                    <a *ngIf="!currentUser" routerLink="login" class="btn btn-primary my-2">Login</a>
+                    <a *ngIf="!currentUser" routerLink="register" class="btn btn-secondary my-2">Register</a>
+                </p>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<div class="album py-5 bg-light">
-    <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-                <div class="card shadow-sm">
-                    <img width="100%" height="225" focusable="false" class="cover"
-                        src="https://images.unsplash.com/photo-1609530029590-b2dc0e8faf90?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fGJvb2slMjBzdG9yZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
-                    <div class="card-body">
-                        <p class="card-text">There is nothing like an old classic.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div *ngIf="currentUser" class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img width="100%" height="225" focusable="false" class="cover"
+                            src="https://images.unsplash.com/photo-1609530029590-b2dc0e8faf90?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fGJvb2slMjBzdG9yZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60">
+                        <div class="card-body">
+                            <p class="card-text">There is nothing like an old classic.</p>
+                            <div class="d-flex justify-content-between align-items-center">
                             </div>
-
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card shadow-sm">
-                    <img width="100%" height="225" focusable="false" class="cover"
-                        src="https://images.unsplash.com/photo-1520387294843-fd994fd872e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=675&q=80">
-                    <div class="card-body">
-                        <p class="card-text">Every new release is in our store.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div *ngIf="currentUser" class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img width="100%" height="225" focusable="false" class="cover"
+                            src="https://images.unsplash.com/photo-1520387294843-fd994fd872e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=675&q=80">
+                        <div class="card-body">
+                            <p class="card-text">Every new release is in our store.</p>
+                            <div class="d-flex justify-content-between align-items-center">
                             </div>
-
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card shadow-sm">
-                    <img width="100%" height="225" focusable="false" class="cover"
-                        src="https://images.unsplash.com/photo-1545244100-07c99f4d0492?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80">
-                    <div class="card-body">
-                        <p class="card-text">And of courese The best sellers!</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div *ngIf="currentUser" class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img width="100%" height="225" focusable="false" class="cover"
+                            src="https://images.unsplash.com/photo-1545244100-07c99f4d0492?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80">
+                        <div class="card-body">
+                            <p class="card-text">And of courese The best sellers!</p>
+                            <div class="d-flex justify-content-between align-items-center">
                             </div>
-
                         </div>
                     </div>
                 </div>

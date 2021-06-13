@@ -23,3 +23,7 @@
                  1px -1px 0 #000,
                 -1px -1px 0 #000;
 }
+
+.jumbotron-landing{
+    min-height: 84.5vh;
+}

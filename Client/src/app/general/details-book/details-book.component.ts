@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Book } from 'src/app/models/book';
 import { AuthService } from 'src/app/services/auth.service';
 import { BookService } from 'src/app/services/book.service';
@@ -17,7 +18,8 @@ export class DetailsBookComponent implements OnInit {
     private raute: ActivatedRoute, 
     private bookService: BookService, 
     private authServise: AuthService,
-    private router: Router) {
+    private router: Router,
+    private toastrService: ToastrService) {
     this.raute.params.subscribe(res => {
       this.id = res['id'];
       this.bookService.details(this.id).subscribe(res => {
@@ -34,11 +36,14 @@ export class DetailsBookComponent implements OnInit {
   get adminUser(){return this.authServise.isAdmin()}
 
   update(id: any){
-    this.router.navigate(["/" + id + "/update"])
+    this.router.navigate(["/" + id + "/update"]);
   }
 
   delete(id: any){
-
+    this.bookService.delete(id).subscribe(res => {
+      this.toastrService.success("You have Deleted a Book!");
+      this.router.navigate(["books"])
+    }) 
   }
 
   buy(id: any){

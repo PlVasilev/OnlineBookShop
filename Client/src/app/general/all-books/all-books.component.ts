@@ -14,23 +14,16 @@ export class AllBooksComponent implements OnInit {
   constructor(private bookService: BookService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getCats();
+    this.getBooks();
   }
-  getCats(){
+  
+  getBooks(){
     this.bookService.all().subscribe((books: BookForList[]) => {
       this.books = books;
       console.log(this.books);
     })
   }
  
-
-  delete(id: any) {
-    this.bookService.delete(id).subscribe(res => {
-      console.log(res);
-      this.getCats();
-    })
-  }
-
   edit(id: any) {
       this.router.navigate(["/contracts/" + id + "/edit"])
     } 

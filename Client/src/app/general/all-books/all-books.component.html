@@ -9,9 +9,15 @@
                         <p class="card-text">{{book.summaryDescription}}</p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Author: {{book.author}}</li>
-                        <li class="list-group-item">Price: $ {{book.price | number : '1.2-2'}} </li>
-                        <li *ngIf="book.isLimited" class="list-group-item text-danger font-weight-bold">Limited Qantity</li>
+                        <li class="list-group-item card-body">Author: {{book.author}}</li>
+                        <li class="list-group-item">
+                            <div id="price-sold-items">
+                                <span>Price: $ {{book.price | number : '1.2-2'}}</span>  
+                                <span>Sold: {{book.numberOfPurchases}}</span>
+                            </div>
+                        </li>
+                        <li *ngIf="book.isLimited" class="list-group-item text-danger font-weight-bold card-body">Limited Qantity: {{book.quantity}}</li>
+                        <li *ngIf="!book.isLimited" class="list-group-item text-danger font-weight-bold card-body">Qantity: {{book.quantity}}</li>
                     </ul>
                     <div class="card-body">
                         <button routerLink="book/{{book.id}}" class="btn btn-primary my-2">Buy Book</button>

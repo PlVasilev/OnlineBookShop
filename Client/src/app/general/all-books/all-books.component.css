@@ -12,3 +12,9 @@
     height: 15vw;
     object-fit: cover;
 }
+
+
+#price-sold-items{
+    display: flex;
+    justify-content: space-around;
+}

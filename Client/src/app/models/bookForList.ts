@@ -5,6 +5,8 @@ export interface BookForList {
     bookImage: string,
     price: number,
     summaryDescription: string,
+    quantity: number,
+    numberOfPurchases: number,
     isLimited: boolean
 }
 

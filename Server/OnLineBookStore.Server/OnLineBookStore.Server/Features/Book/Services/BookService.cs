@@ -26,6 +26,8 @@
                 BookImage = b.BookImage,
                 Price = b.Price,
                 SummaryDescription = b.SummaryDescription,
+                Quantity = b.Quantity,
+                NumberOfPurchases = b.NumberOfPurchases,
                 IsLimited = b.Quantity < 10,
             }).ToListAsync();
 
