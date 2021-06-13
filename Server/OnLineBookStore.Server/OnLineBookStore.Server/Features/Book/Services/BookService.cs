@@ -39,6 +39,7 @@
                 Id = book.Id,
                 Title = book.Title,
                 Description = book.Description,
+                SummaryDescription = book.SummaryDescription,
                 ISBN = book.ISBN,
                 BookImage = book.BookImage,
                 Author = book.Author,
@@ -46,7 +47,8 @@
                 Price = book.Price,
                 Quantity = book.Quantity,
                 NumberOfPages = book.NumberOfPages,
-                NumberOfPurchases = book.NumberOfPurchases
+                NumberOfPurchases = book.NumberOfPurchases,
+                QuantityLimit = book.QuantityLimit
             };
             return viewModel;
         }

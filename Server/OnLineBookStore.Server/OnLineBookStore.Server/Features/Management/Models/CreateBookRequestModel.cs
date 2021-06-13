@@ -47,6 +47,9 @@ namespace OnLineBookStore.Server.Features.Management.Models
         public int Quantity { get; set; }
 
         [Range(0, int.MaxValue)]
+        public int QuantityLimit { get; set; }
+
+        [Range(0, int.MaxValue)]
         public int NumberOfPurchases { get; set; }
 
     }

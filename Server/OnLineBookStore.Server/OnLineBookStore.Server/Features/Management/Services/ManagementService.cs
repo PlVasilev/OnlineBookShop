@@ -52,12 +52,14 @@
             string bookImage,
             decimal price,
             int quantity,
+            int quantityLimit,
             string creatorId)
         {
 
             var book = await _data.Books.FirstOrDefaultAsync(x => x.CreatorId == creatorId && x.Id == id);
 
             if (book == null) return false;
+            if (quantity > quantityLimit) return false;
 
             book.Description = description;
             book.SummaryDescription = summaryDescription;
@@ -65,6 +67,7 @@
             book.Price = price;
             book.Quantity = quantity;
             book.CreatorId = creatorId;
+            book.QuantityLimit = quantityLimit;
 
             await _data.SaveChangesAsync();
             return true;
@@ -82,8 +85,10 @@
             int numberOfPages,
             int quantity,
             int numberOfPurchases,
+            int quantityLimit,
             string creatorId)
         {
+            if (quantity > quantityLimit) return null;
             var book = new Book
             {
                 Id = Guid.NewGuid().ToString(),
@@ -98,7 +103,8 @@
                 Quantity = quantity,
                 NumberOfPages = numberOfPages,
                 CreatorId = creatorId,
-                NumberOfPurchases = numberOfPurchases
+                NumberOfPurchases = numberOfPurchases,
+                QuantityLimit = quantityLimit
             };
 
             _data.Books.Add(book);

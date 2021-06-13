@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
-import { MustMatch } from 'src/app/services/passwordValidator';
+import { MustMatch } from 'src/app/services/validators/passwordValidator';
 
 @Component({
   selector: 'app-register',

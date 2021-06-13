@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BookService } from 'src/app/services/book.service';
+import { quantityLimitExceededValidator } from 'src/app/services/validators/quantityLimitExceededValidator';
+
 
 @Component({
   selector: 'app-create-book',
@@ -31,7 +33,8 @@ export class CreateBookComponent implements OnInit {
       'numberOfPages': ['', [Validators.required, Validators.min(1), Validators.max(100000000)]],
       'quantity': ['', [Validators.required, Validators.min(0), Validators.max(100000000)]],
       'numberOfPurchases': ['', [Validators.required, Validators.min(0), Validators.max(100000000)]],
-    })
+      'quantityLimit': ['', [Validators.required, Validators.min(0), Validators.max(100000000)]],
+    }, { validators: quantityLimitExceededValidator })
 
   }
 
@@ -58,5 +61,6 @@ export class CreateBookComponent implements OnInit {
   get numberOfPages() { return this.bookForm.get('numberOfPages'); }
   get quantity() { return this.bookForm.get('quantity'); }
   get numberOfPurchases() { return this.bookForm.get('numberOfPurchases'); }
+  get quantityLimit() { return this.bookForm.get('quantityLimit'); }
 
 }

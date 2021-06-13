@@ -4,12 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Book } from 'src/app/models/book';
 import { BookService } from 'src/app/services/book.service';
+import { quantityLimitExceededValidator } from 'src/app/services/directives/quantity-limit.directive';
 
 @Component({
   selector: 'app-update-book',
   templateUrl: './update-book.component.html',
   styleUrls: ['./update-book.component.css']
 })
+
 export class UpdateBookComponent implements OnInit {
   updateForm: FormGroup;
   book: Book | undefined;
@@ -27,21 +29,32 @@ export class UpdateBookComponent implements OnInit {
       'bookImage': ['', Validators.required],
       'price': ['', [Validators.required, Validators.min(0), Validators.max(100000000)]],
       'quantity': ['', [Validators.required, Validators.min(0), Validators.max(100000000)]],
-    })
-
+      'quantityLimit': ['', [Validators.required, Validators.min(0), Validators.max(100000000)]],
+    }, { validators: quantityLimitExceededValidator })
   }
 
+  
+
   ngOnInit(): void {
+   this.getBook();
+  }
+
+  getBook(){
     this.route.params.subscribe(params => {
       let id = params['id']
       this.bookService.details(id).subscribe(res => {
+        console.log(res);
+        
         this.book = res;
+        console.log(this.book);
+        
         this.updateForm = this.fb.group({
           'description': [`${this.book.description}`,  [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]],
           'summaryDescription': [`${this.book.summaryDescription}`, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
           'bookImage': [`${this.book.bookImage}`, Validators.required],
           'price': [`${this.book.price}`,  [Validators.required, Validators.min(0), Validators.max(100000000)]],
           'quantity': [`${this.book.quantity}`,  [Validators.required, Validators.min(0), Validators.max(100000000)]],
+          'quantityLimit': [`${this.book.quantityLimit}`, [Validators.required, Validators.min(0), Validators.max(100000000)]],
         })
       })
     })
@@ -54,7 +67,8 @@ export class UpdateBookComponent implements OnInit {
       'summaryDescription': this.updateForm.value['summaryDescription'],
       'bookImage': this.updateForm.value['bookImage'],
       'price': this.updateForm.value['price'],
-      'quantity': this.updateForm.value['quantity']
+      'quantity': this.updateForm.value['quantity'],
+      'quantityLimit': this.updateForm.value['quantityLimit']
     }
     console.log(updateData);
     
@@ -68,4 +82,6 @@ export class UpdateBookComponent implements OnInit {
   get bookImage() { return this.updateForm.get('bookImage'); }
   get price() { return this.updateForm.get('price'); }
   get quantity() { return this.updateForm.get('quantity'); }
+  get quantityLimit() { return this.updateForm.get('quantityLimit'); }
 }
+

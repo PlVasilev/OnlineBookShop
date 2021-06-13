@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -15,10 +14,13 @@ import { TokenInterceptor } from './services/token-interceptor.service';
 import { ErrorInterceptorService } from './services/error-interceptor.service';
 import { AdministrationModule } from './administration/administration.module';
 import { GeneralModule } from './general/general.module';
+import { QuantityLimitDirective } from './services/directives/quantity-limit.directive';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    QuantityLimitDirective
   ],
   imports: [
     BrowserModule,

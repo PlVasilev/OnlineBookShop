@@ -53,6 +53,9 @@ namespace OnLineBookStore.Server.Data.Models
         [Range(0, int.MaxValue)]
         public int NumberOfPurchases { get; set; }
 
+        [Range(0, int.MaxValue)]
+        public int QuantityLimit { get; set; }
+
         [Required]
         public string CreatorId { get; set; }
 

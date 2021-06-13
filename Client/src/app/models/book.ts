@@ -10,5 +10,6 @@ export interface Book {
     price: number,
     numberOfPages: number,
     quantity: number,
-    numberOfPurchases: number
+    numberOfPurchases: number,
+    quantityLimit: number
 }

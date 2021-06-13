@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using OnLineBookStore.Server.Features.Management.Models;
-
-namespace OnLineBookStore.Server.Features.Management.Services
+﻿namespace OnLineBookStore.Server.Features.Management.Services
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Models;
     public interface IManagementService
     {
         public  Task<bool> Delete(string id, string userId);
@@ -17,6 +15,7 @@ namespace OnLineBookStore.Server.Features.Management.Services
             string bookImage,
             decimal price,
             int quantity,
+            int quantityLimit,
             string creatorId);
 
         public  Task<CreateBookResponseModel> Create(
@@ -31,6 +30,7 @@ namespace OnLineBookStore.Server.Features.Management.Services
             int numberOfPages,
             int quantity,
             int numberOfPurchases,
+            int quantityLimit,
             string creatorId);
     }
 }

@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
-                <form [formGroup]="bookForm" class="user-form"  (ngSubmit)="create()">
+                <form [formGroup]="bookForm" appQantityLimit class="user-form"  (ngSubmit)="create()">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
                         <input type="text" class="form-control" formControlName="title">
@@ -82,6 +82,16 @@
                     </div>
                     <div *ngIf="numberOfPurchases?.touched && numberOfPurchases?.errors" class="alert alert-danger">
                         Number Of Purchases must be a positive number or zero
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantityLimit" class="form-label">Quantity Limit</label>
+                        <input type="number" class="form-control" formControlName="quantityLimit">
+                    </div>
+                    <div *ngIf="quantityLimit?.touched && quantityLimit?.errors" class="alert alert-danger">
+                        Quantity Limit must be a positive number or zero
+                    </div>
+                    <div *ngIf="bookForm.errors?.quantityLimitExceededValidator && (bookForm.touched || bookForm.dirty)" class="cross-validation-error-message alert alert-danger">
+                        Quantity Limit Must be More Than Qnatity !
                     </div>
                     <button type="submit" class="btn btn-primary">Create</button>
                 </form>

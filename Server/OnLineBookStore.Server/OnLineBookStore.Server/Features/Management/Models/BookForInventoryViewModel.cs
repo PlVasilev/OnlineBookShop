@@ -10,6 +10,7 @@
         public decimal Price { get; set; }
         public int NumberOfPages { get; set; }
         public int Quantity { get; set; }
-        public int NumberOfPurchases { get; set; }
+        public int NumberOfPurchases { get; set; } 
+        public int QuantityLimit { get; set; }
     }
 }

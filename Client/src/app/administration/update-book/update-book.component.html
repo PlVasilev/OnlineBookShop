@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
-                <form [formGroup]="updateForm" class="user-form" (ngSubmit)="update()">
+                <form [formGroup]="updateForm" appQantityLimit class="user-form" (ngSubmit)="update()">
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="form-control" id="description" rows="3"
@@ -40,6 +40,16 @@
                     </div>
                     <div *ngIf="quantity?.touched && quantity?.errors" class="alert alert-danger">
                         Quantity must be a positive number or zero
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantityLimit" class="form-label">Quantity Limit</label>
+                        <input type="number" class="form-control" formControlName="quantityLimit">
+                    </div>
+                    <div *ngIf="quantityLimit?.touched && quantityLimit?.errors" class="alert alert-danger">
+                        Quantity Limit must be a positive number or zero
+                    </div>
+                    <div *ngIf="updateForm.errors?.quantityLimitExceededValidator && (updateForm.touched || updateForm.dirty)" class=" alert alert-danger">
+                        Quantity Limit Must be More Than Qnatity !
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>

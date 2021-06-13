@@ -51,8 +51,9 @@ namespace OnLineBookStore.Server.Features.Management
                 model.BookImage,
                 model.Price,
                 model.Quantity,
+                model.QuantityLimit,
                 userId);
-
+                
             if (!updated) return BadRequest();
 
             return Ok();
@@ -75,6 +76,7 @@ namespace OnLineBookStore.Server.Features.Management
                 model.NumberOfPages,
                 model.Quantity,
                 model.NumberOfPurchases,
+                model.QuantityLimit,
                 userId);
 
             return Created(nameof(this.CreateBook), book);
