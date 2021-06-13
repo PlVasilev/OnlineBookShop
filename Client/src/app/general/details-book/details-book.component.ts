@@ -20,13 +20,8 @@ export class DetailsBookComponent implements OnInit {
     private authServise: AuthService,
     private router: Router,
     private toastrService: ToastrService) {
-    this.raute.params.subscribe(res => {
-      this.id = res['id'];
-      this.bookService.details(this.id).subscribe(res => {
-        this.book = res;
-      })
-    })
-  }
+    this.getbook()
+  };
 
   ngOnInit(): void {
   }
@@ -34,6 +29,18 @@ export class DetailsBookComponent implements OnInit {
   get currentUser(){return this.authServise.isAutheticated()}
 
   get adminUser(){return this.authServise.isAdmin()}
+
+  getbook(){
+    this.raute.params.subscribe(res => {
+      this.id = res['id'];
+      this.bookService.details(this.id).subscribe(res => {
+
+        console.log(res);
+        
+        this.book = res;
+      })
+    })
+  }
 
   update(id: any){
     this.router.navigate(["/" + id + "/update"]);

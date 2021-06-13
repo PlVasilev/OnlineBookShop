@@ -37,7 +37,6 @@ export class NavigationComponent implements OnInit {
    console.log(this.searchForm.value);
    let searchedText = this.searchForm.value['searchString']
    this.searchForm.reset()
-   this.router.navigate(["/search/" + searchedText])
+   this.router.navigate([`/search/${searchedText}`])
   }
-
 }

@@ -48,6 +48,12 @@ const routes: Routes = [{
   data: { isLogged: true }
 },
 {
+  path: "search/:search/:id",
+  component: DetailsBookComponent,
+  canActivate: [AuthGuardService],
+  data: { isLogged: true }
+},
+{
   path: 'createBook',
   component: CreateBookComponent,
   canActivate: [AuthGuardService],

@@ -17,7 +17,7 @@
 
         public async Task<IEnumerable<BookListViewModel>> All() =>
             await _data.Books
-                .OrderBy(b => b.NumberOfPurchases)
+                .OrderByDescending(b => b.NumberOfPurchases)
                 .Select(b => new BookListViewModel
             {
                 Id = b.Id,

@@ -79,7 +79,8 @@
                 Price = price,
                 Quantity = quantity,
                 NumberOfPages = numberOfPages,
-                CreatorId = creatorId
+                CreatorId = creatorId,
+                NumberOfPurchases = numberOfPurchases
             };
 
             _data.Books.Add(book);

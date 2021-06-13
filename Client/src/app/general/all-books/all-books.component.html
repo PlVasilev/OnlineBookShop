@@ -17,7 +17,7 @@
                             </div>
                         </li>
                         <li *ngIf="book.isLimited" class="list-group-item text-danger font-weight-bold card-body">Limited Qantity: {{book.quantity}}</li>
-                        <li *ngIf="!book.isLimited" class="list-group-item text-danger font-weight-bold card-body">Qantity: {{book.quantity}}</li>
+                        <li *ngIf="!book.isLimited" class="list-group-item font-weight-bold card-body">Qantity: {{book.quantity}}</li>
                     </ul>
                     <div class="card-body">
                         <button routerLink="book/{{book.id}}" class="btn btn-primary my-2">Buy Book</button>
