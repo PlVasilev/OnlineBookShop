@@ -9,5 +9,6 @@
 
         public Task<IEnumerable<CartBooksViewModel>> GetCart(string userId);
         public Task<bool> AddToCart(string userId, string bookId, int quantity);
+        public Task<bool> CheckOutBooks(IEnumerable<BookCheckOutRequestModel> bookIds);
     }
 }

@@ -64,10 +64,32 @@
             return await _data.SaveChangesAsync() > 0;
         }
 
+        public async Task<bool> CheckOutBooks(IEnumerable<BookCheckOutRequestModel> booksToCheckOut)
+        {
+            var bookIdQuantityDict = new Dictionary<string, int>();
+            foreach (var bookCheckOut in booksToCheckOut)
+            {
+                bookIdQuantityDict[bookCheckOut.BookId] = bookCheckOut.Quantity;
+            }
+            var books =  _data.Books.Where(t => bookIdQuantityDict.Keys.Contains(t.Id)).ToList();
+            foreach (var book in books)
+            {
+                book.Quantity -= bookIdQuantityDict[book.Id];
+                book.NumberOfPurchases += bookIdQuantityDict[book.Id];
+            }
+
+            var cartId = booksToCheckOut.First().CartId;
+            ClearCart(cartId);
+
+            _data.Books.UpdateRange(books);
+            var result = await _data.SaveChangesAsync();
+            return result > 0;
+        }
+
 
         public async Task<bool> AddToUser(string userId)
         {
-            var cart = new Data.Models.Cart
+            var cart = new Cart
             {
                 Id = Guid.NewGuid().ToString(),
                 UserId = userId
@@ -99,5 +121,13 @@
                 .ThenInclude(b => b.Book)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
+        private async void ClearCart(string cartId)
+        {
+            var cart = await _data.Carts
+                .Include(c => c.CartBooks)
+                .FirstOrDefaultAsync(c => c.Id == cartId);
+
+            _data.CartBooks.RemoveRange(cart.CartBooks);
+        }
     }
 }

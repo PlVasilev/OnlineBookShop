@@ -11,6 +11,7 @@ export class CartService {
 
   private addToCartPath = environment.apiUrl + "/Cart/AddToCart";
   private getCartPath = environment.apiUrl + "/Cart/GetCart";
+  private chekOutPath = environment.apiUrl + "/Cart/CheckOut";
 
   constructor(private http: HttpClient) { }
 
@@ -20,5 +21,9 @@ export class CartService {
 
   getCart(): Observable<Array<BookForCart>>{
     return this.http.get<Array<BookForCart>>(this.getCartPath);
+  }
+
+  checkOut(data: any): Observable<string>{
+    return this.http.post<string>(this.chekOutPath, data);
   }
 }

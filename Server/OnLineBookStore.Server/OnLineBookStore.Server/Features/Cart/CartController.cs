@@ -40,5 +40,16 @@
             
             return Ok();
         }
+
+        [HttpPost]
+        [Route(nameof(CheckOut))]
+        public async Task<ActionResult> CheckOut(IEnumerable<BookCheckOutRequestModel> books)
+        {
+            var result =  await _cartService.CheckOutBooks(books);
+            if (!result)
+                BadRequest();
+
+            return Ok();
+        }
     }
 }
