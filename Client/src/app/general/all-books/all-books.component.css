@@ -18,3 +18,13 @@
     display: flex;
     justify-content: space-around;
 }
+
+.price-filter-input{
+    width: 10.00%;
+    margin: 0.5em;
+    
+}
+#filter-Form{
+    justify-content: center;
+}
+

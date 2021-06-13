@@ -44,7 +44,6 @@ export class CreateBookComponent implements OnInit {
   create() {
     console.log(this.bookForm.value);
     this.bookService.create(this.bookForm.value).subscribe(data => {
-      console.log(data);
       this.toastrService.success("success", "You have Created a Book!");
       this.router.navigate([`/books/${data['bookId']}`])
     })

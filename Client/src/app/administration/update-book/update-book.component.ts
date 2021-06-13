@@ -43,11 +43,7 @@ export class UpdateBookComponent implements OnInit {
     this.route.params.subscribe(params => {
       let id = params['id']
       this.bookService.details(id).subscribe(res => {
-        console.log(res);
-        
         this.book = res;
-        console.log(this.book);
-        
         this.updateForm = this.fb.group({
           'description': [`${this.book.description}`,  [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]],
           'summaryDescription': [`${this.book.summaryDescription}`, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
