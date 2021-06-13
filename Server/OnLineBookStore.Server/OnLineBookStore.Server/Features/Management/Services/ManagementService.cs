@@ -6,6 +6,8 @@
     using Data;
     using OnLineBookStore.Server.Data.Models;
     using Models;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class ManagementService : IManagementService
     {
@@ -15,6 +17,22 @@
         {
             _data = data;
         }
+
+        public async Task<IEnumerable<BookForInventoryViewModel>> GetInventory() =>
+          await _data.Books
+              .OrderBy(b => b.Quantity)
+              .Select(b => new BookForInventoryViewModel
+              {
+                  Author = b.Author,
+                  Id = b.Id,
+                  ISBN = b.ISBN,
+                  NumberOfPurchases = b.NumberOfPurchases,
+                  NumberOfPages = b.NumberOfPages,
+                  Price = b.Price,
+                  Quantity = b.Quantity,
+                  Title = b.Title,
+                  Year = b.Year
+              }).ToListAsync();
 
         public async Task<bool> Delete(string id, string userId)
         {
@@ -86,7 +104,7 @@
             _data.Books.Add(book);
             await _data.SaveChangesAsync();
 
-            return new CreateBookResponseModel{BookId = book.Id};
+            return new CreateBookResponseModel { BookId = book.Id };
         }
     }
 }

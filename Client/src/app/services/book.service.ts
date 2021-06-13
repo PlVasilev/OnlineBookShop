@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Book } from '../models/book';
+import { BookForInventory } from '../models/bookForInventory';
 import { BookForList } from '../models/bookForList';
 
 @Injectable({
@@ -15,6 +16,7 @@ export class BookService {
   private dtailsPath = environment.apiUrl + "/Book";
   private deletePath = environment.apiUrl + "/Management/DeleteBook";
   private editPath = environment.apiUrl + "/Management/UpdateBook";
+  private inventoryPath = environment.apiUrl + "/Management/Inventory";
 
 
   constructor(private http: HttpClient) { }
@@ -37,5 +39,9 @@ export class BookService {
 
   update(data: any) : Observable<Book>{
     return this.http.put<Book>(this.editPath,data);
+  }
+
+  inventory(): Observable<Array<BookForInventory>>{
+    return this.http.get<Array<BookForInventory>>(this.inventoryPath);
   }
 }

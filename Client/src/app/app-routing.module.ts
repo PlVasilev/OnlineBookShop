@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateBookComponent } from './administration/create-book/create-book.component';
+import { InventoryComponent } from './administration/inventory/inventory.component';
 import { UpdateBookComponent } from './administration/update-book/update-book.component';
 import { LandingComponent } from './core/landing/landing.component';
 import { NotAuthorizedComponent } from './core/not-authorized/not-authorized.component';
@@ -59,6 +60,12 @@ const routes: Routes = [{
   component: DetailsBookComponent,
   canActivate: [AuthGuardService],
   data: { isLogged: true }
+},
+{
+  path: 'inventory',
+  component: InventoryComponent,
+  canActivate: [AuthGuardService],
+  data: { isAdmin: true }
 },
 {
   path: 'createBook',

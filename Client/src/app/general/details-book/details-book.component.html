@@ -27,7 +27,7 @@
                 <div class="col-lg-6 pl-lg-5 ml-auto details-container">
                     <div class="mb-5 property-details">
                         <h3 class="text-black mb-4">{{book?.title}}</h3>
-                        <p>Price: $ {{book?.price}}</p>
+                        <p>Price: $ {{book.price | number : '1.2-2'}}</p>
                         <p>ISBN: {{book?.isbn}}</p>
                         <p>Author: {{book?.author}}</p>
                         <p>Year: {{book?.year}} </p>

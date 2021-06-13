@@ -1,4 +1,6 @@
-﻿namespace OnLineBookStore.Server.Features.Management
+﻿using System.Collections.Generic;
+
+namespace OnLineBookStore.Server.Features.Management
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
@@ -17,6 +19,12 @@
             _managementService = managementService;
         }
 
+        [HttpGet]
+        [Route(nameof(Inventory))]
+        public async Task<IEnumerable<BookForInventoryViewModel>> Inventory() => 
+            await _managementService.GetInventory();
+  
+
         [HttpDelete]
         [Route( nameof(DeleteBook) +"/{id}")]
         public async Task<ActionResult> DeleteBook(string id)
@@ -33,7 +41,7 @@
 
         [HttpPut] 
         [Route(nameof(UpdateBook))]
-        public async Task<ActionResult<UpdateBookRequestModel>> UpdateBook(UpdateBookRequestModel model)
+        public async Task<ActionResult> UpdateBook(UpdateBookRequestModel model)
         {
             var userId = this.User.GetId();
             var updated = await _managementService.Update(

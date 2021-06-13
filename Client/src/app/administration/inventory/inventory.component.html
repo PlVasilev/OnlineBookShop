@@ -1,0 +1,32 @@
+<div class="jumbotron">
+    <h2>Inventory</h2>
+    <table class="table table-sm">
+        <thead>
+          <tr>
+            <th style="width: 10.00%">ISBN</th>
+            <th style="width: 25.00%">Title</th>
+            <th style="width: 25.00%">Author</th>
+            <th style="width: 10.00%">Year</th>
+            <th style="width: 7.00%">Price</th>
+            <th style="width: 7.00%">Pages</th>
+            <th style="width: 7.00%">Sales</th>
+            <th style="width: 7.00%">Quantity</th>
+            <th style="width: 10.00%">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of books">
+            <td>{{book.isbn}}</td>
+            <td>{{book.title}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.year}}</td>
+            <td class="number">$ {{book.price | number : '1.2-2'}}</td>
+            <td class="number">{{book.numberOfPages}}</td>
+            <td class="number" >{{book.numberOfPurchases}}</td>
+            <td class="number">{{book.quantity}}</td>
+            <button type="button" class="btn btn-outline-success" type="submit" (click)="update(book.id)">Update</button>
+          </tr>
+        </tbody>
+      </table>
+</div>
+

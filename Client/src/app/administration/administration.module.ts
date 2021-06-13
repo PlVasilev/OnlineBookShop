@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { CreateBookComponent } from './create-book/create-book.component';
 import { UpdateBookComponent } from './update-book/update-book.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InventoryComponent } from './inventory/inventory.component';
 
 
 
 @NgModule({
   declarations: [
     CreateBookComponent,
-    UpdateBookComponent
+    UpdateBookComponent,
+    InventoryComponent
   ],
   imports: [
     CommonModule,

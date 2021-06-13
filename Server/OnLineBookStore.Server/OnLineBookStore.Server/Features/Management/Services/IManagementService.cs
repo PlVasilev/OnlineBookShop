@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OnLineBookStore.Server.Features.Management.Models;
 
@@ -7,6 +8,7 @@ namespace OnLineBookStore.Server.Features.Management.Services
     public interface IManagementService
     {
         public  Task<bool> Delete(string id, string userId);
+        public  Task<IEnumerable<BookForInventoryViewModel>> GetInventory();
 
         public  Task<bool> Update(
             string id,
