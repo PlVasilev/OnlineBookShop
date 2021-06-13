@@ -67,7 +67,6 @@ export class DetailsBookComponent implements OnInit {
   addToCart(){
     let selectedQuantity = this.buyForm.value['quantity'];
     if(this.book !== undefined && selectedQuantity > this.book.quantity){
-      console.log(selectedQuantity);
       this.toastrService.error(`You Can NOT select more than ${this.book.quantity} copies !`);
     } else{
       let data = {

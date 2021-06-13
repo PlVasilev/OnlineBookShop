@@ -29,8 +29,7 @@ export class CartComponent implements OnInit {
     let booksForChechOut: Array<BookForCheckOut> = [];
     booksForChechOut = this.books;
     this.cartSetrvice.checkOut(booksForChechOut).subscribe(res =>{
-      console.log(res);
-      
+      this.router.navigate(['books'])
     })
   }
 }

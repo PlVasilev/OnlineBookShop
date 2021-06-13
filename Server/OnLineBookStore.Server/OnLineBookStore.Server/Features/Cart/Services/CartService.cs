@@ -45,6 +45,11 @@
             var userWithCart = await GetUserCart(userId);
             var cartContent = userWithCart.Cart.CartBooks.ToHashSet();
 
+            var book = _data.Books.FirstOrDefault(b => b.Id == bookId);
+
+            if (book != null && book.Quantity < quantity)
+                return false;
+
             var cartBook = cartContent.FirstOrDefault(b => b.BookId == bookId);
             if (cartBook == null)
             { 
@@ -121,11 +126,11 @@
                 .ThenInclude(b => b.Book)
                 .FirstOrDefaultAsync(u => u.Id == userId);
 
-        private async void ClearCart(string cartId)
+        private void ClearCart(string cartId)
         {
-            var cart = await _data.Carts
+            var cart =  _data.Carts
                 .Include(c => c.CartBooks)
-                .FirstOrDefaultAsync(c => c.Id == cartId);
+                .FirstOrDefault(c => c.Id == cartId);
 
             _data.CartBooks.RemoveRange(cart.CartBooks);
         }
