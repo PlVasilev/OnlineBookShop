@@ -7,7 +7,7 @@
     {
         public Task<bool> AddToUser(string userId);
 
-        public Task<IEnumerable<CartBooksViewModel>> GetCart(string id);
+        public Task<IEnumerable<CartBooksViewModel>> GetCart(string userId);
         public Task<bool> AddToCart(string userId, string bookId, int quantity);
     }
 }

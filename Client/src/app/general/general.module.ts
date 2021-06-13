@@ -8,6 +8,7 @@ import { AllBooksComponent } from './all-books/all-books.component';
 import { DetailsBookComponent } from './details-book/details-book.component';
 import { RouterModule } from '@angular/router';
 import { SearchBooksComponent } from './search-books/search-books.component';
+import { CartComponent } from './cart/cart.component';
 
 
 
@@ -18,7 +19,8 @@ import { SearchBooksComponent } from './search-books/search-books.component';
     RegisterComponent,
     AllBooksComponent,
     DetailsBookComponent,
-    SearchBooksComponent
+    SearchBooksComponent,
+    CartComponent
     
   ],
   imports: [

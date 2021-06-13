@@ -1,0 +1,28 @@
+<div class="jumbotron">
+    <h2>Your Cart Content:</h2>
+    <div class="table-responsive-md">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Qantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  *ngFor="let book of books">
+                    <td>{{book.title}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.quantity}}</td>
+                    <td>{{book.price}}</td>
+                    <td>{{book.totalPrice}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="buy-button">
+        <button class="btn btn-success" type="submit">Buy the listed Books</button>
+    </div>
+</div>

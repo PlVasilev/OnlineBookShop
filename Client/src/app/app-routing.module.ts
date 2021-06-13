@@ -6,6 +6,7 @@ import { LandingComponent } from './core/landing/landing.component';
 import { NotAuthorizedComponent } from './core/not-authorized/not-authorized.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { AllBooksComponent } from './general/all-books/all-books.component';
+import { CartComponent } from './general/cart/cart.component';
 import { DetailsBookComponent } from './general/details-book/details-book.component';
 import { LoginComponent } from './general/login/login.component';
 import { RegisterComponent } from './general/register/register.component';
@@ -32,6 +33,12 @@ const routes: Routes = [{
 {
   path: 'books',
   component: AllBooksComponent,
+  canActivate: [AuthGuardService],
+  data: { isLogged: true }
+},
+{
+  path: 'cart',
+  component: CartComponent,
   canActivate: [AuthGuardService],
   data: { isLogged: true }
 },

@@ -18,29 +18,32 @@
             _data = data;
         }
 
-        public async Task<IEnumerable<CartBooksViewModel>> GetCart(string id)
-            => await _data.Carts
-                .Where(cart => cart.Id == id)
-                .Include(cartBook => cartBook.CartBooks)
-                .ThenInclude(book => book.Book)
-                .SelectMany(c => c.CartBooks, (c, cb) =>
-                    new CartBooksViewModel
-                    {
-                        CartId = cb.CartId,
-                        BookId = cb.BookId,
-                        BookTitle = cb.Book.Title,
-                        Quantity = cb.Quantity
-                    }
-                ).ToListAsync();
+        public async Task<IEnumerable<CartBooksViewModel>> GetCart(string userId)
+        {
+            var userWithCart = await GetCartContent(userId);
+            var cartContent = userWithCart.Cart.CartBooks.ToHashSet();
+
+            var result = new HashSet<CartBooksViewModel>();
+            foreach (var cartBook in cartContent)
+            {
+                result.Add(new CartBooksViewModel
+                {
+                    CartId = cartBook.CartId,
+                    BookId = cartBook.BookId,
+                    Title = cartBook.Book.Title,
+                    Author = cartBook.Book.Author,
+                    Price = cartBook.Book.Price,
+                    TotalPrice = cartBook.Book.Price * cartBook.Quantity,
+                    Quantity = cartBook.Quantity
+                });
+            }
+            return result;
+        }
 
         public async Task<bool> AddToCart(string userId, string bookId, int quantity)
         {
-            var user =  await _data.Users
-                .Include(u => u.Cart)
-                .ThenInclude(cb => cb.CartBooks)
-                .FirstOrDefaultAsync(u => u.Id == userId);
-
-            var cartContent = user.Cart.CartBooks.ToHashSet();
+            var userWithCart = await GetUserCart(userId);
+            var cartContent = userWithCart.Cart.CartBooks.ToHashSet();
 
             var cartBook = cartContent.FirstOrDefault(b => b.BookId == bookId);
             if (cartBook == null)
@@ -48,7 +51,7 @@
                 cartBook = new CartBook
                 {
                     BookId = bookId,
-                    CartId = user.CartId,
+                    CartId = userWithCart.CartId,
                     Quantity = quantity
                 };
                 _data.CartBooks.Add(cartBook);
@@ -82,5 +85,19 @@
             var result = await _data.SaveChangesAsync();
             return result > 0;
         }
+
+        private async Task<User> GetUserCart(string userId) =>
+            await _data.Users
+                .Include(u => u.Cart)
+                .ThenInclude(cb => cb.CartBooks)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+        private async Task<User> GetCartContent(string userId) =>
+            await _data.Users
+                .Include(u => u.Cart)
+                .ThenInclude(cb => cb.CartBooks)
+                .ThenInclude(b => b.Book)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
     }
 }

@@ -9,6 +9,9 @@
           <li class="nav-item">
             <a *ngIf="currentUser" class="nav-link active" aria-current="page" routerLink="books">Books</a>
           </li>
+          <li>
+            <a *ngIf="currentUser" class="nav-link active" aria-current="page" routerLink="cart">Cart</a>
+          </li>
           <li *ngIf="adminUser" class="nav-item dropdown" >
             <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Mangement
