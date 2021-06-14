@@ -11,6 +11,9 @@ For the store users there are books listing, search and filtering. All users can
 My goal with this app was to create functionality for about 30 h of work in 3 days. 
 There was some wonder how everything should be structured and what pattern is best for the Client and the Server that took time.
 
+The Server has implemented Swagger - I find it realy helpful tool 
+The Client has implemented Toastr  - For better UX
+
 #### Finaly the app works as intended but there are things that can be done better:
 1. There are many **Magic Strings and numbers** those must go to global constants class.
 2. Client Module structure and services can be splited differently now they are 
