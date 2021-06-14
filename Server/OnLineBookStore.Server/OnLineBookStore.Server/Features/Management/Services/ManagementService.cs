@@ -31,8 +31,8 @@
         {
             var inventory = new Inventory
             {
-                Id = id + "1",
-                QantityLimitTreshhold = 0
+                Id = id,
+                QantityLimitTreshhold = 10
             };
             _data.Inventories.Add(inventory);
             return await _data.SaveChangesAsync() > 0;

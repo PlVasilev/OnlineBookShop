@@ -15,6 +15,8 @@ import { quantityLimitExceededValidator } from 'src/app/services/directives/quan
 export class UpdateBookComponent implements OnInit {
   updateForm: FormGroup;
   book: Book | undefined;
+  quantityField: number = 0;
+  quantityLimitField: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -54,10 +56,10 @@ export class UpdateBookComponent implements OnInit {
   }
 
   update() {
-    let qantity = this.updateForm.value['quantity'];
-    let quantityLimit = this.updateForm.value['quantityLimit'];
+    this.quantityField = this.updateForm.value['quantity'];
+    this.quantityLimitField = this.updateForm.value['quantityLimit'];
     
-    if (quantityLimit < qantity) {
+    if (this.quantityLimitField > this.quantityField) {
       this.toastrService.error("The Qantity Limit should be More or Equal to the Qantity!");
     } else {
       let updateData = {

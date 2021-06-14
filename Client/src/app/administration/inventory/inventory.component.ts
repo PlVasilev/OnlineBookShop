@@ -30,7 +30,6 @@ export class InventoryComponent implements OnInit {
 
   getBooks(){
     this.bookService.inventory().subscribe((books: BookForInventory[]) => {
-      console.log(books);
       this.books = books;
     })
   }
