@@ -42,11 +42,17 @@ export class CreateBookComponent implements OnInit {
   }
 
   create() {
-    console.log(this.bookForm.value);
-    this.bookService.create(this.bookForm.value).subscribe(data => {
-      this.toastrService.success("success", "You have Created a Book!");
-      this.router.navigate([`/books/${data['bookId']}`])
-    })
+    let qantity = this.bookForm.value['quantity'];
+    let quantityLimit = this.bookForm.value['quantityLimit'];
+    if(quantityLimit < qantity){
+      this.toastrService.error("The Qantity Limit should be More or Equal to the Qantity!");
+    }else{
+      this.bookService.create(this.bookForm.value).subscribe(data => {
+        this.toastrService.success("You have Created a Book!");
+        this.router.navigate([`/books/${data['bookId']}`])
+      })
+    }
+  
   }
 
   get title() { return this.bookForm.get('title'); }

@@ -31,7 +31,8 @@
                   Price = b.Price,
                   Quantity = b.Quantity,
                   Title = b.Title,
-                  Year = b.Year
+                  Year = b.Year,
+                  QuantityLimit = b.QuantityLimit,
               }).ToListAsync();
 
         public async Task<bool> Delete(string id, string userId)

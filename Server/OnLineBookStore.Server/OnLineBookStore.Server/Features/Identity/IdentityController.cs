@@ -1,6 +1,4 @@
-﻿using OnLineBookStore.Server.Infrastructure;
-
-namespace OnLineBookStore.Server.Features.Identity
+﻿namespace OnLineBookStore.Server.Features.Identity
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -11,6 +9,7 @@ namespace OnLineBookStore.Server.Features.Identity
     using Models;
     using Services;
     using OnLineBookStore.Server.Features.Cart.Services;
+    using Infrastructure;
     public class IdentityController : ApiController
     {
         private readonly UserManager<User> _userManager;

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BookForList } from 'src/app/models/bookForList';
-import { AuthService } from 'src/app/services/auth.service';
 import { BookService } from 'src/app/services/book.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { BookService } from 'src/app/services/book.service';
   styleUrls: ['./search-books.component.css']
 })
 export class SearchBooksComponent implements OnInit {
+  filterForm: FormGroup;
   search: string;
   books: Array<BookForList> = [];
   searchedBooks: Array<BookForList> = [];
@@ -18,22 +19,29 @@ export class SearchBooksComponent implements OnInit {
 
   constructor(
     private raute: ActivatedRoute,
-    private bookService: BookService,) {
+    private bookService: BookService,
+    private fb: FormBuilder, 
+    private toastrService: ToastrService) {
     this.search = "";
+    this.filterForm = this.fb.group({
+      'minValue': [''],
+      'maxValue': [''],
+    })
   }
 
   ngOnInit(): void {
     this.raute.params.subscribe(res => {
       this.search = res['search'];
-      this.bookService.all().subscribe(res => {
-        this.books = res;
+      this.bookService.all().subscribe(books => {
+        this.books = books;
         this.filterSerachedBooks()
+        this.books = this.searchedBooks;
       })
     })
   }
 
-  filterSerachedBooks(){
-    this.searchedBooks =[];
+  filterSerachedBooks() {
+    this.searchedBooks = [];
     if (this.search === "") {
       this.searchedBooks = this.books;
       console.log(this.searchedBooks);
@@ -44,5 +52,28 @@ export class SearchBooksComponent implements OnInit {
         }
       })
     }
+  }
+
+  filter() {
+    this.books = this.searchedBooks;
+    let min = this.filterForm.value['minValue'];
+    let max = this.filterForm.value['maxValue'];
+    console.log(this.books);
+    console.log(this.searchedBooks);
+    if(min < 0 || max < 0){
+      this.toastrService.error("Max price and Min price mut be a postive numbers");
+    }
+    else if (min >= max) {
+      this.toastrService.error("Your Max price should be more than the Min price");
+    } else {
+      this.toastrService.success(`Books from $ ${min} to $ ${max} prices.`);
+      this.books = this.searchedBooks.filter(x => x.price >= min && x.price <= max);
+      console.log(this.books);
+      
+    }
+  }
+
+  showAll() {
+    this.books = this.searchedBooks;
   }
 }

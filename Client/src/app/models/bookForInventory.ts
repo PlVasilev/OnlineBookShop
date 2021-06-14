@@ -8,4 +8,5 @@ export interface BookForInventory {
     numberOfPages: number,
     quantity: number,
     numberOfPurchases: number
+    quantityLimit: number
 }

@@ -1,10 +1,13 @@
 <div class="jumbotron">
-    <div></div>
-    <form id="filter-Form" [formGroup]="filterForm" class="d-flex my-2 my-lg-0" (ngSubmit)="filter()">
+    <form id="filter-Form" [formGroup]="filterForm" class="d-flex my-2 my-lg-0" (ngSubmit)="filter()">  
         <input  type="number" class="form-control price-filter-input" formControlName="minValue"  placeholder="Min $" aria-label="Search">
         <input  type="number" class="form-control price-filter-input" formControlName="maxValue"  placeholder="Max $" aria-label="Search">
         <button class="btn btn-success price-filter-input"  type="submit" >Filter </button>
     </form>
+    <div class="middle-button">
+        <button class="btn btn-success price-filter-input"  (click)="showAll()" >Show All</button>
+    </div>
+    
     <div class="container">
         <div class="row row-cols-auto justify-content-md-center">
             <div class="col" *ngFor="let book of books">

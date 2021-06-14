@@ -18,11 +18,10 @@ export class UpdateBookComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-     private bookService: BookService, 
-     private route: ActivatedRoute,
-     private toastrService: ToastrService,
-     private router: Router) 
-     {
+    private bookService: BookService,
+    private route: ActivatedRoute,
+    private toastrService: ToastrService,
+    private router: Router) {
     this.updateForm = this.fb.group({
       'description': ['', [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]],
       'summaryDescription': ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
@@ -33,46 +32,51 @@ export class UpdateBookComponent implements OnInit {
     }, { validators: quantityLimitExceededValidator })
   }
 
-  
-
   ngOnInit(): void {
-   this.getBook();
+    this.getBook();
   }
 
-  getBook(){
+  getBook() {
     this.route.params.subscribe(params => {
       let id = params['id']
       this.bookService.details(id).subscribe(res => {
         this.book = res;
         this.updateForm = this.fb.group({
-          'description': [`${this.book.description}`,  [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]],
+          'description': [`${this.book.description}`, [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]],
           'summaryDescription': [`${this.book.summaryDescription}`, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
           'bookImage': [`${this.book.bookImage}`, Validators.required],
-          'price': [`${this.book.price}`,  [Validators.required, Validators.min(0), Validators.max(100000000)]],
-          'quantity': [`${this.book.quantity}`,  [Validators.required, Validators.min(0), Validators.max(100000000)]],
+          'price': [`${this.book.price}`, [Validators.required, Validators.min(0), Validators.max(100000000)]],
+          'quantity': [`${this.book.quantity}`, [Validators.required, Validators.min(0), Validators.max(100000000)]],
           'quantityLimit': [`${this.book.quantityLimit}`, [Validators.required, Validators.min(0), Validators.max(100000000)]],
         })
       })
     })
   }
 
-  update() {   
-    let updateData = {
-      'id': this.book?.id,
-      'description': this.updateForm.value['description'],
-      'summaryDescription': this.updateForm.value['summaryDescription'],
-      'bookImage': this.updateForm.value['bookImage'],
-      'price': this.updateForm.value['price'],
-      'quantity': this.updateForm.value['quantity'],
-      'quantityLimit': this.updateForm.value['quantityLimit']
-    }
-    console.log(updateData);
+  update() {
+    let qantity = this.updateForm.value['quantity'];
+    let quantityLimit = this.updateForm.value['quantityLimit'];
     
-    this.bookService.update(updateData).subscribe(data => {
-      this.toastrService.success("success", "You have Updated a Book!");
-      this.router.navigate([`/books/${this.book?.id}`])
-    })
+    if (quantityLimit < qantity) {
+      this.toastrService.error("The Qantity Limit should be More or Equal to the Qantity!");
+    } else {
+      let updateData = {
+        'id': this.book?.id,
+        'description': this.updateForm.value['description'],
+        'summaryDescription': this.updateForm.value['summaryDescription'],
+        'bookImage': this.updateForm.value['bookImage'],
+        'price': this.updateForm.value['price'],
+        'quantity': this.updateForm.value['quantity'],
+        'quantityLimit': this.updateForm.value['quantityLimit']
+      }
+      this.bookService.update(updateData).subscribe(data => {
+        this.toastrService.success("You have Updated a Book!");
+        this.router.navigate([`/books/${this.book?.id}`])
+
+      })
+    }
   }
+
   get description() { return this.updateForm.get('description'); }
   get summaryDescription() { return this.updateForm.get('summaryDescription'); }
   get bookImage() { return this.updateForm.get('bookImage'); }

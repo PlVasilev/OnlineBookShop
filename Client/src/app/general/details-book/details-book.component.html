@@ -9,7 +9,7 @@
                     <div class="owl-carousel slide-one-item with-dots">
                         <div class="text-center">
                             <img src={{book?.bookImage}} alt="Image" class="img-top">
-                            <a *ngIf="adminUser" (click)="update(book?.id)" class="btn btn-warning">Edit</a>
+                            <a *ngIf="adminUser" (click)="update(book?.id)" class="btn btn-warning">Update</a>
                             <a *ngIf="adminUser" (click)="delete(book?.id)" class="btn btn-danger">Delete</a>
                             <form [formGroup]="buyForm" class="add-to-cart-form"  (ngSubmit)="addToCart()">
                                 <div class="mb-3">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BookForList } from 'src/app/models/bookForList';
 import { BookService } from 'src/app/services/book.service';
 
@@ -15,18 +16,18 @@ export class AllBooksComponent implements OnInit {
 
   filterForm: FormGroup;
 
-  constructor(private fb: FormBuilder,private bookService:BookService) { 
-  this.filterForm = this.fb.group({
-    'minValue': [''],
-    'maxValue': [''],
-  })
-}
+  constructor(private fb: FormBuilder, private bookService: BookService, private toastrService: ToastrService) {
+    this.filterForm = this.fb.group({
+      'minValue': [''],
+      'maxValue': [''],
+    })
+  }
 
   ngOnInit(): void {
     this.getBooks();
   }
 
-  getBooks(){
+  getBooks() {
     this.bookService.all().subscribe((books: BookForList[]) => {
       this.databaseBooks = books;
       this.books = books;
@@ -41,10 +42,19 @@ export class AllBooksComponent implements OnInit {
     return this.filterForm.get('maxValue');
   }
 
-  filter(){
+  filter() {
     this.books = this.databaseBooks;
     let min = this.filterForm.value['minValue'];
     let max = this.filterForm.value['maxValue'];
-    this.books = this.databaseBooks.filter(x => x.price >= min && x.price <= max);
+    if (min >= max) {
+      this.toastrService.error("You have Updated a Book!");
+    } else {
+      this.toastrService.success(`Books from $ ${min} to $ ${max} prices.`);
+      this.books = this.databaseBooks.filter(x => x.price >= min && x.price <= max);
+    }
+  }
+
+  showAll(){
+    this.books = this.databaseBooks;
   }
 }
