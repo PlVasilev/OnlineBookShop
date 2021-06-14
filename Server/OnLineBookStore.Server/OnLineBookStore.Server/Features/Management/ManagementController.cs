@@ -1,5 +1,4 @@
-﻿
-namespace OnLineBookStore.Server.Features.Management
+﻿namespace OnLineBookStore.Server.Features.Management
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
@@ -82,5 +81,18 @@ namespace OnLineBookStore.Server.Features.Management
 
             return Created(nameof(this.CreateBook), book);
         }
+
+        [HttpPut]
+        [Route(nameof(QuantityThreshold))]
+        public async Task<ActionResult> QuantityThreshold(QuantityLimitRequestModel model)
+        {
+            //TODO fix Quantity limit threshold functionality
+            string id = "admin";
+            var result = await _managementService.SetQuantityThreshold(id, model.Limit);
+            if (!result)
+                BadRequest();
+            
+            return Ok();
+        }   
     }
 }

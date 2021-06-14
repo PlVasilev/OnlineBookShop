@@ -5,7 +5,7 @@
     using Models;
     public interface IBookService
     {
-        public Task<IEnumerable<BookListViewModel>> All();
+        public Task<IEnumerable<BookListViewModel>> All(string userId);
         public Task<BookDetailsViewModel> Details(string id);
     }
 }

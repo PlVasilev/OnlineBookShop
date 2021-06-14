@@ -1,4 +1,6 @@
-﻿namespace OnLineBookStore.Server.Features.Book
+﻿using OnLineBookStore.Server.Infrastructure;
+
+namespace OnLineBookStore.Server.Features.Book
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -21,8 +23,12 @@
         [HttpGet]
         [Authorize]
         [Route(nameof(All))]
-        public async Task<IEnumerable<BookListViewModel>> All() =>
-            await _bookService.All();
+        public async Task<IEnumerable<BookListViewModel>> All()
+        {
+            var userId = User.GetId();
+            return await _bookService.All(userId);
+        }
+            
 
         [HttpGet]
         [Authorize]

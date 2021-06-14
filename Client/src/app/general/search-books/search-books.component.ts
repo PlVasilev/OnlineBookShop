@@ -48,10 +48,10 @@ export class SearchBooksComponent implements OnInit {
     this.searchedBooks = [];
     if (this.search === "") {
       this.searchedBooks = this.books;
-      console.log(this.searchedBooks);
     } else {
       this.books.forEach(book => {
-        if (book.title.includes(this.search) || book.author.includes(this.search)) {
+        if (book.title.toLowerCase().includes(this.search.toLowerCase()) ||
+           book.author.toLowerCase().includes(this.search.toLowerCase())) {
           this.searchedBooks.push(book);
         }
       })
@@ -62,8 +62,6 @@ export class SearchBooksComponent implements OnInit {
     this.books = this.searchedBooks;
     let min = this.filterForm.value['minValue'];
     let max = this.filterForm.value['maxValue'];
-    console.log(this.books);
-    console.log(this.searchedBooks);
     if(min < 0 || max < 0){
       this.toastrService.error("Max price and Min price mut be a postive numbers");
     }

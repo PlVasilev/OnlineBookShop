@@ -1,34 +1,40 @@
 <div class="jumbotron">
-    <h2>Inventory</h2>
-    <table class="table table-sm">
-        <thead>
-          <tr>
-            <th style="width: 10.00%">ISBN</th>
-            <th style="width: 25.00%">Title</th>
-            <th style="width: 25.00%">Author</th>
-            <th style="width: 10.00%">Year</th>
-            <th style="width: 6.00%">Price</th>
-            <th style="width: 6.00%">Pages</th>
-            <th style="width: 6.00%">Sales</th>
-            <th style="width: 6.00%">Q Limit</th>
-            <th style="width: 6.00%">Quantity</th>
-            <th style="width: 10.00%">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let book of books">
-            <td>{{book.isbn}}</td>
-            <td>{{book.title}}</td>
-            <td>{{book.author}}</td>
-            <td>{{book.year}}</td>
-            <td class="number">$ {{book.price | number : '1.2-2'}}</td>
-            <td class="number">{{book.numberOfPages}}</td>
-            <td class="number" >{{book.numberOfPurchases}}</td>
-            <td class="number">{{book.quantityLimit}}</td>
-            <td class="number">{{book.quantity}}</td>
-            <button type="button" class="btn btn-outline-success" type="submit" (click)="update(book.id)">Update</button>
-          </tr>
-        </tbody>
-      </table>
+  <h2>Inventory</h2>
+  
+    <form id="inventory-Form" [formGroup]="treshholdForm" class="d-flex" (ngSubmit)="setTreshhold()">
+      <input style="width: 50.00%" class="form-control me-2" class="form-control" formControlName="limit" type="number"
+        placeholder="Set the minimul value below which books will be maked as LIMITED" aria-label="Search">
+      <button style="width: 25.00%" class="btn btn-success" type="submit">Set Inventory Treshold for Qnatity Limit</button>
+    </form>
+  
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th style="width: 10.00%">ISBN</th>
+        <th style="width: 25.00%">Title</th>
+        <th style="width: 23.00%">Author</th>
+        <th style="width: 10.00%">Year</th>
+        <th style="width: 8.00%">Price</th>
+        <th style="width: 6.00%">Pages</th>
+        <th style="width: 6.00%">Sales</th>
+        <th style="width: 6.00%">Q Limit</th>
+        <th style="width: 6.00%">Quantity</th>
+        <th style="width: 10.00%">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{book.isbn}}</td>
+        <td>{{book.title}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.year}}</td>
+        <td class="number">$ {{book.price | number : '1.2-2'}}</td>
+        <td class="number">{{book.numberOfPages}}</td>
+        <td class="number">{{book.numberOfPurchases}}</td>
+        <td class="number">{{book.quantityLimit}}</td>
+        <td class="number">{{book.quantity}}</td>
+        <button type="button" class="btn btn-outline-success" type="submit" (click)="update(book.id)">Update</button>
+      </tr>
+    </tbody>
+  </table>
 </div>
-

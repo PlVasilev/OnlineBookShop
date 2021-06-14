@@ -1,4 +1,6 @@
-﻿namespace OnLineBookStore.Server.Features.Identity
+﻿using OnLineBookStore.Server.Features.Management.Services;
+
+namespace OnLineBookStore.Server.Features.Identity
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -16,17 +18,19 @@
         private readonly AppSettings _appSettings;
         private readonly IIdentityService _identityService;
         private readonly ICartService _cartService;
-
+        private readonly IManagementService _managementService;
 
         public IdentityController(UserManager<User> userManager,
             IOptions<AppSettings> appSettings, 
             IIdentityService identityService, 
-            ICartService cartService)
+            ICartService cartService, 
+            IManagementService managementService)
         {
             _userManager = userManager;
             _identityService = identityService;
             _appSettings = appSettings.Value;
             _cartService = cartService;
+            _managementService = managementService;
         }
 
         [HttpPost]
@@ -51,10 +55,13 @@
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (_userManager.Users.Count() == 1)
+            {
                 await _userManager.AddToRoleAsync(user, "Admin");
-            
-            await _userManager.AddToRoleAsync(user, "User");
 
+                //TODO fix Quantity limit threshold functionality
+                await _managementService.CreateInventory("admin");
+            }
+            await _userManager.AddToRoleAsync(user, "User");
             await _cartService.AddToUser(user.Id);
 
             if (result.Succeeded) return Ok();

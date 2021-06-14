@@ -6,6 +6,9 @@
     public interface IManagementService
     {
         public  Task<bool> Delete(string id, string userId);
+        public Task<bool> SetQuantityThreshold(string id, int quantity);
+
+        public Task<bool> CreateInventory(string id);
         public  Task<IEnumerable<BookForInventoryViewModel>> GetInventory();
 
         public  Task<bool> Update(

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Book } from '../models/book';
 import { BookForInventory } from '../models/bookForInventory';
 import { BookForList } from '../models/bookForList';
+import { Inventory } from '../models/inventory';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,14 @@ export class BookService {
   private deletePath = environment.apiUrl + "/Management/DeleteBook";
   private editPath = environment.apiUrl + "/Management/UpdateBook";
   private inventoryPath = environment.apiUrl + "/Management/Inventory";
+  private updateQantityLimitPath = environment.apiUrl + "/Management/QuantityThreshold";
 
 
   constructor(private http: HttpClient) { }
+
+  updateQantityLimit(data: any) : Observable<any>{
+    return this.http.put(this.updateQantityLimitPath,data);
+  }
 
   create(data: any): Observable<any>{
     return this.http.post<Book>(this.createPath,data);

@@ -15,21 +15,25 @@
             _data = data;
         }
 
-        public async Task<IEnumerable<BookListViewModel>> All() =>
-            await _data.Books
+        public async Task<IEnumerable<BookListViewModel>> All(string userId)
+        {
+            var inventory = _data.Inventories.FirstOrDefault(i => i.Id == "admin");
+            return await _data.Books
                 .OrderByDescending(b => b.NumberOfPurchases)
                 .Select(b => new BookListViewModel
-            {
-                Id = b.Id,
-                Title = b.Title,
-                Author = b.Author,
-                BookImage = b.BookImage,
-                Price = b.Price,
-                SummaryDescription = b.SummaryDescription,
-                Quantity = b.Quantity,
-                NumberOfPurchases = b.NumberOfPurchases,
-                IsLimited = b.Quantity < 10,
-            }).ToListAsync();
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Author = b.Author,
+                    BookImage = b.BookImage,
+                    Price = b.Price,
+                    SummaryDescription = b.SummaryDescription,
+                    Quantity = b.Quantity,
+                    NumberOfPurchases = b.NumberOfPurchases,
+                    IsLimited = b.Quantity < inventory.QantityLimitTreshhold,
+                }).ToListAsync();
+        }
+
 
         public async Task<BookDetailsViewModel> Details(string id)
         {

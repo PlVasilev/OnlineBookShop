@@ -10,3 +10,7 @@ h2{
 .number{
     text-align: right;
 }
+
+#inventory-Form{
+    justify-content: center;
+}

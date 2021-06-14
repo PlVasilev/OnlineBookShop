@@ -18,6 +18,26 @@
             _data = data;
         }
 
+        public async Task<bool> SetQuantityThreshold(string id, int quantity)
+        {
+           var inventory = await _data.Inventories.FirstOrDefaultAsync(x => x.Id == id);
+           inventory.QantityLimitTreshhold = quantity;
+
+           _data.Inventories.Update(inventory);
+           return await _data.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> CreateInventory(string id)
+        {
+            var inventory = new Inventory
+            {
+                Id = id + "1",
+                QantityLimitTreshhold = 0
+            };
+            _data.Inventories.Add(inventory);
+            return await _data.SaveChangesAsync() > 0;
+        }
+
         public async Task<IEnumerable<BookForInventoryViewModel>> GetInventory() =>
           await _data.Books
               .OrderBy(b => b.Quantity)
