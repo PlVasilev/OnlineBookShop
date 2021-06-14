@@ -30,6 +30,10 @@ export class SearchBooksComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getbooks();
+  }
+
+  getbooks(){
     this.raute.params.subscribe(res => {
       this.search = res['search'];
       this.bookService.all().subscribe(books => {
@@ -74,6 +78,7 @@ export class SearchBooksComponent implements OnInit {
   }
 
   showAll() {
+    this.getbooks();
     this.filterForm.reset();
     this.books = this.searchedBooks;
   }

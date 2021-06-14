@@ -55,6 +55,7 @@ export class AllBooksComponent implements OnInit {
   }
 
   showAll(){
+    this.getBooks();
     this.filterForm.reset();
     this.books = this.databaseBooks;
   }
