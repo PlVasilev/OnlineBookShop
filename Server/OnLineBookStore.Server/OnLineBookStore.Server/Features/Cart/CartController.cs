@@ -36,7 +36,7 @@
             var result = await _cartService.AddToCart(userId, model.BookId, model.Quantity);
 
             if (!result)
-                BadRequest();
+               return BadRequest();
             
             return Ok();
         }

@@ -38,6 +38,10 @@
         public async Task<BookDetailsViewModel> Details(string id)
         {
             var book = await _data.Books.FirstOrDefaultAsync(b => b.Id == id);
+            if (book == null)
+            {
+                return null;
+            }
             var viewModel = new BookDetailsViewModel
             {
                 Id = book.Id,

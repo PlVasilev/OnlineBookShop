@@ -33,7 +33,7 @@ namespace OnlineBookShop.Tests.IdentityTests
             Assert.AreEqual(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
-        [TestCase("testUser2", "test@test.test2", "123", TestName = "Valid_parameters")]
+        [TestCase("testUser4", "test@test.test4", "123", TestName = "Valid_parameters")]
         public void Test_Registration_With_Valid_Data(string username, string email, string password)
         {
             var request = new RestRequest(BaseURL + "/Identity/Register", Method.POST);
