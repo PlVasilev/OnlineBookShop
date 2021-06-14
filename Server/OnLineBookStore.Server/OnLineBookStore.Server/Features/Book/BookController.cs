@@ -19,7 +19,7 @@
 
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize]
         [Route(nameof(All))]
         public async Task<IEnumerable<BookListViewModel>> All() =>
             await _bookService.All();
