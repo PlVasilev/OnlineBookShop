@@ -74,6 +74,7 @@ export class DetailsBookComponent implements OnInit {
         "quantity": selectedQuantity
       }
       this.cartService.addToCart(data).subscribe(res =>{
+        this.toastrService.success("You have Added a Book to the Cart!");
         this.router.navigate(["books"])
       })
     }

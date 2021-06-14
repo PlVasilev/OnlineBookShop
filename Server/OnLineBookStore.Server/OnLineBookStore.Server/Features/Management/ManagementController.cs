@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace OnLineBookStore.Server.Features.Management
 {
     using System.Threading.Tasks;
@@ -8,6 +7,8 @@ namespace OnLineBookStore.Server.Features.Management
     using Models;
     using Services;
     using Infrastructure;
+    using System.Collections.Generic;
+
 
     [Authorize(Roles = "Admin")]
     public class ManagementController : ApiController

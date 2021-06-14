@@ -1,7 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace OnLineBookStore.Server.Features.Management.Models
+﻿namespace OnLineBookStore.Server.Features.Management.Models
 {
+    using System.ComponentModel.DataAnnotations;
     public class CreateBookRequestModel
     {
 

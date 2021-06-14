@@ -1,12 +1,11 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using OnLineBookStore.Server.Data;
-
-namespace OnLineBookStore.Server.Infrastructure
+﻿namespace OnLineBookStore.Server.Infrastructure
 {
+    using System.Linq;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
+    using Data;
     public static class ApplicationBuilderExtensions
     {
         public static IApplicationBuilder AddSwaggerUI(this IApplicationBuilder app) =>

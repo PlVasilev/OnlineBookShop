@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using OnLineBookStore.Server.Infrastructure;
-
-namespace OnLineBookStore.Server.Data.Models
+﻿namespace OnLineBookStore.Server.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
     public class CartBook
     {
         [Required]

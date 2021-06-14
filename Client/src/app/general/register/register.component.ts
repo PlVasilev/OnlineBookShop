@@ -18,17 +18,16 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      'username': ['',Validators.required],
-      'email': ['',Validators.required],
-      'password': ['',Validators.required],
-      'confirmPassword': ['',Validators.required]
+      'username': ['',[Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      'email': ['',[Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      'password': ['',[Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      'confirmPassword': ['',[Validators.required, Validators.minLength(3), Validators.maxLength(100)]]
     }, {
       validator: MustMatch('password', 'confirmPassword')
   })
   }
 
   register(){
-    console.log(this.registerForm.value);
     this.authService.register(this.registerForm.value).subscribe(data =>{
       this.toastrService.success("You have Registered!");
         this.router.navigate(["login"])

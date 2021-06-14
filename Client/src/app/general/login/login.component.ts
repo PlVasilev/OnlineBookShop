@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private authService: AuthService, private toastrService: ToastrService, private router: Router) { 
     this.loginForm = this.fb.group({
-      'username': ['',Validators.required],
-      'password': ['',Validators.required]
+      'username': ['',[Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      'password': ['',[Validators.required, Validators.minLength(3), Validators.maxLength(100)]]
     })
   }
 
@@ -23,9 +23,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    console.log(this.loginForm.value);
     this.authService.login(this.loginForm.value).subscribe( data =>{
-      console.log(data)
       this.authService.saveToken(data['token']);
       this.toastrService.success("You have Logged In!");
       this.router.navigate(["books"])

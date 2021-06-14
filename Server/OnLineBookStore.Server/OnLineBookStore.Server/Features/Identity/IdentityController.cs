@@ -74,8 +74,8 @@
             if (user == null) 
                 return Unauthorized();
 
-            var passwordValid = _userManager.CheckPasswordAsync(user, model.Password);
-            if (passwordValid == null) 
+            var passwordValid = await _userManager.CheckPasswordAsync(user, model.Password);
+            if (passwordValid == false) 
                 return Unauthorized();
 
             var roles = await this._userManager.GetRolesAsync(user);

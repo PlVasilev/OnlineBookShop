@@ -53,7 +53,7 @@ export class AuthService {
     logout() {
       try {
        localStorage.clear();
-       this.toastrService.success("success", "You have logged out!");
+       this.toastrService.success("You have logged out!");
         console.log( this.getToken()) ;
        this.isAdmin();
        this.router.navigate(['/']);

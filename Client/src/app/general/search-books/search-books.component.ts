@@ -74,6 +74,7 @@ export class SearchBooksComponent implements OnInit {
   }
 
   showAll() {
+    this.filterForm.reset();
     this.books = this.searchedBooks;
   }
 }

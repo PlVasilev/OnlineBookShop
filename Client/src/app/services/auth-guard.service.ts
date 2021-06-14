@@ -26,13 +26,8 @@ export class AuthGuardService {
       return true;
     }
     else {
-      if(this.isLogged == true){
-        console.log(this.isLogged);
-        this.router.navigate(['/register'])
-        return false;
-      }
-      this.router.navigate(['/login'])
-      return false;
+      this.router.navigate(['/notauthorized'])
+      return false
     }
   }
 }

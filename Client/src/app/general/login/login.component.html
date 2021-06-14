@@ -9,7 +9,7 @@
                   <input type="text" class="form-control"  formControlName="username" >
                 </div>
                 <div *ngIf="username?.touched && username?.errors" class="alert alert-danger">
-                    Username is required
+                    Username must between 3 and 100 charcters lenght
                 </div>
 
                 <div class="mb-3">
@@ -17,7 +17,7 @@
                   <input type="password" class="form-control" formControlName="password">
                 </div>
                 <div *ngIf="password?.touched && password?.errors" class="alert alert-danger">
-                  Password is required
+                  Password must between 3 and 100 charcters lenght
               </div>
                 <button type="submit" class="btn btn-primary">Login</button>
               </form>

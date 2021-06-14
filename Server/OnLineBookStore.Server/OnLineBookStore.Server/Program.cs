@@ -1,8 +1,7 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
-
 namespace OnLineBookStore.Server
 {
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Hosting;
     public class Program
     {
         public static void Main(string[] args)

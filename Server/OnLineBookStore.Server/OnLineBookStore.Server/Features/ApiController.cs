@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace OnLineBookStore.Server.Features
+﻿namespace OnLineBookStore.Server.Features
 {
+    using Microsoft.AspNetCore.Mvc;
     [ApiController]
     [Route("[controller]")]
     public abstract class ApiController : ControllerBase

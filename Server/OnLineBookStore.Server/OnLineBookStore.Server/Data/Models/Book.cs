@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
-
-namespace OnLineBookStore.Server.Data.Models
+﻿namespace OnLineBookStore.Server.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.Collections.Generic;
     public class Book
     {
         [Key]

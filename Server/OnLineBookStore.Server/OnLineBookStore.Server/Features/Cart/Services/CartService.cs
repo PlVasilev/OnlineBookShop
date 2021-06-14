@@ -81,6 +81,12 @@
             {
                 book.Quantity -= bookIdQuantityDict[book.Id];
                 book.NumberOfPurchases += bookIdQuantityDict[book.Id];
+                //TODO - Client and Server - Checkout process needs addition functionality to avoid collisions
+                if (book.Quantity <= 0)
+                {
+                    book.NumberOfPurchases += book.Quantity;
+                    book.Quantity = 0;
+                }
             }
 
             var cartId = booksToCheckOut.First().CartId;
