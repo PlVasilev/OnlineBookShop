@@ -56,8 +56,8 @@ export class UpdateBookComponent implements OnInit {
   }
 
   update() {
-    this.quantityField = this.updateForm.value['quantity'];
-    this.quantityLimitField = this.updateForm.value['quantityLimit'];
+    this.quantityField = +this.updateForm.value['quantity'];
+    this.quantityLimitField = +this.updateForm.value['quantityLimit'];
     
     if (this.quantityLimitField < this.quantityField) {
       this.toastrService.error("The Qantity Limit should be More or Equal to the Qantity!");
